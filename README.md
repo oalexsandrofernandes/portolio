@@ -1,4 +1,50 @@
-# Especificação de Design — Réplica de gregorcollienne.com
+# Portfólio — Alexsandro Fernandes
+
+Site estático de portfólio de arquitetura. Sem build: é só abrir `index.html`
+num servidor estático (Live Server do VS Code, `python -m http.server`, etc.).
+
+## Páginas
+- `index.html` — home: grade de fotos em loop infinito com o nome fixo ao fundo
+- `trabalhos.html` — índice dos projetos, em grade ou lista
+- `projeto.html?p=<slug>` — página de um projeto (filmstrip + foto grande)
+
+As fotos e os dados dos projetos ficam no array `PROJECTS`, no topo de
+`script.js`. Trocar lá atualiza as três páginas de uma vez. As imagens atuais
+são de banco gratuito (Unsplash) e servem só como referência visual — devem ser
+substituídas pelas fotos reais dos projetos.
+
+## Fontes
+
+O site usa a família **Rational**, de Rene Bieder — uma fonte comercial. Os
+arquivos não estão versionados aqui porque este repositório é público e
+publicá-los deixaria a fonte paga disponível para download.
+
+Para rodar com a tipografia correta, crie uma pasta `fonts/` na raiz com estes
+quatro arquivos, extraídos da sua licença:
+
+| Arquivo em `fonts/` | Origem |
+| --- | --- |
+| `RationalDisplay-Bold.otf` | Rational Display Bold |
+| `RationalDisplay-ExtraBold.otf` | Rational Display Extra Bold |
+| `RationalText-Light.otf` | Rational Text Light |
+| `RationalText-ExtraBold.otf` | Rational Text Extra Bold |
+
+Sem esses arquivos o site continua funcionando: o CSS cai no fallback Helvetica.
+
+Antes de publicar o site num domínio, vale conferir no pedido da MyFonts se a
+licença cobre uso como *webfont* — hospedar o arquivo para o navegador baixar é
+um uso diferente de instalar a fonte no computador, e costuma ser vendido à
+parte.
+
+---
+
+# Especificação de Design — referência
+
+Documento de referência usado para guiar a construção do site. A referência
+visual foi o portfólio do fotógrafo Gregor Collienne (gregorcollienne.com):
+foram reproduzidas decisões técnicas de layout e interação (paleta, escala
+tipográfica, espaçamentos de grade, mecânicas de animação), com conteúdo,
+imagens e código próprios.
 
 ## Visão geral
 Portfólio de fotografia, minimalista e editorial. Estética de "galeria de arte":
