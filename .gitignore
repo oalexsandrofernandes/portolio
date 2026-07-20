@@ -2,3 +2,8 @@
 Thumbs.db
 *.log
 node_modules/
+
+# Arquivo bruto da compra das fontes (família completa, ~4 MB, 40 arquivos).
+# O site carrega só os 4 pesos em fonts/ — o restante não vai pro repositório.
+OTF/
+MyFonts Order */

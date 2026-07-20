@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  PORTFÓLIO — ALEXSANDRO FERNANDES — HOME (OVERVIEW)
+  PORTFÓLIO — ALEXSANDRO FERNANDES — PROJETOS (WORK)
   ============================================================
-  O QUE TROCAR:
-  1. NOME FIXO — .home-name, mais abaixo.
-  2. GALERIA    — array PROJECTS em script.js (compartilhado com
-     trabalhos.html). Troque src, alt e legenda de cada foto.
-     Imagens atuais são de banco gratuito (Unsplash), ilustrativas.
-  Contato e navegação ficam em trabalhos.html e sobre.html — esta
-  página é só o grid infinito.
+  Índice de projetos em dois modos: GRADE (miniaturas com o nome
+  revelado no hover) e LISTA (nomes grandes que revelam a foto de
+  capa no hover). Os dados vêm do array PROJECTS em script.js.
   ============================================================
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alexsandro Fernandes — Arquitetura</title>
+<title>Projetos — Alexsandro Fernandes</title>
 <link rel="stylesheet" href="style.css?v=7">
 </head>
-<body class="is-home">
+<body class="is-work">
 
-<!-- ---------------- HOME: NAV MÍNIMA + NOME FIXO + GRADE INFINITA ---------------- -->
 <header class="site-header">
   <button type="button" class="nav-opener" id="nav-opener" aria-expanded="false" aria-controls="navscreen" aria-label="Menu">
     <span class="nav-opener-face nav-opener-face--open" aria-hidden="true"></span>
@@ -47,13 +42,21 @@
   </div>
 </div>
 
-<div class="home-name" aria-hidden="true">Alexsandro Fernandes</div>
+<!-- ---------------- WORK: GRADE + LISTA ---------------- -->
+<main class="work">
+  <div class="work-grid" id="work-grid"></div>
+  <ul class="work-list" id="work-list"></ul>
+</main>
+
+<img class="work-list-preview" id="work-list-preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+
+<div class="work-toggle" role="group" aria-label="Alternar visualização">
+  <button type="button" class="is-active" data-view="grid" aria-pressed="true">Grade</button>
+  <span class="mono" aria-hidden="true">/</span>
+  <button type="button" data-view="list" aria-pressed="false">Lista</button>
+</div>
 
 <div class="page-veil" aria-hidden="true"></div>
-
-<section class="home-gallery-wrap" id="home-gallery-wrap">
-  <div class="gallery gallery--home" id="home-gallery"></div>
-</section>
 
 <script src="script.js?v=7"></script>
 </body>

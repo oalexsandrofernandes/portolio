@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  PORTFÓLIO — ALEXSANDRO FERNANDES — HOME (OVERVIEW)
+  PORTFÓLIO — ALEXSANDRO FERNANDES — PROJETO (FOCO)
   ============================================================
-  O QUE TROCAR:
-  1. NOME FIXO — .home-name, mais abaixo.
-  2. GALERIA    — array PROJECTS em script.js (compartilhado com
-     trabalhos.html). Troque src, alt e legenda de cada foto.
-     Imagens atuais são de banco gratuito (Unsplash), ilustrativas.
-  Contato e navegação ficam em trabalhos.html e sobre.html — esta
-  página é só o grid infinito.
+  Página template única: lê ?p=<slug> na URL e renderiza o
+  projeto correspondente (título, filmstrip, imagem principal)
+  a partir do PROJECT_GROUPS derivado do array PROJECTS em
+  script.js. Não precisa de um arquivo HTML por projeto.
   ============================================================
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alexsandro Fernandes — Arquitetura</title>
+<title id="project-page-title">Projeto — Alexsandro Fernandes</title>
 <link rel="stylesheet" href="style.css?v=7">
 </head>
-<body class="is-home">
+<body>
 
-<!-- ---------------- HOME: NAV MÍNIMA + NOME FIXO + GRADE INFINITA ---------------- -->
 <header class="site-header">
   <button type="button" class="nav-opener" id="nav-opener" aria-expanded="false" aria-controls="navscreen" aria-label="Menu">
     <span class="nav-opener-face nav-opener-face--open" aria-hidden="true"></span>
@@ -47,13 +43,29 @@
   </div>
 </div>
 
-<div class="home-name" aria-hidden="true">Alexsandro Fernandes</div>
+<!-- ---------------- PROJETO: TÍTULO + FILMSTRIP + IMAGEM PRINCIPAL ---------------- -->
+<section class="project-focus">
+  <h1 class="project-focus-title" id="project-title"></h1>
+  <div class="project-stage">
+    <nav class="project-filmstrip" id="project-filmstrip" aria-label="Fotos do projeto"></nav>
+    <div class="project-main">
+      <img id="project-main-img" src="" alt="">
+    </div>
+  </div>
+</section>
+
+<div class="project-info-panel" id="project-info-panel" hidden>
+  <span class="mono" id="project-info-name"></span>
+  <span class="mono" id="project-info-type"></span>
+</div>
+
+<nav class="project-bar mono">
+  <button type="button" id="project-info-btn" aria-pressed="false">Info</button>
+  <a href="trabalhos.html">Index</a>
+  <a href="trabalhos.html" id="project-back">Back</a>
+</nav>
 
 <div class="page-veil" aria-hidden="true"></div>
-
-<section class="home-gallery-wrap" id="home-gallery-wrap">
-  <div class="gallery gallery--home" id="home-gallery"></div>
-</section>
 
 <script src="script.js?v=7"></script>
 </body>
