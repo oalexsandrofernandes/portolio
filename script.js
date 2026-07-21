@@ -84,52 +84,74 @@ function observeReveal(el, i = 0) {
   revealObserver.observe(el);
 }
 
-/* ---------------- trabalhos: work grid (nome no hover) + lista (preview no hover) ---------------- */
+/* ---------------- trabalhos: grid e lista como inversão simétrica ----------------
+   Os dois conjuntos são renderizados sempre, cada projeto aparecendo duas
+   vezes (uma foto e um nome) ligados pelo mesmo data-rel. Passar o mouse em
+   um deles marca o par correspondente — em modo grade a foto invoca o nome,
+   em modo lista o nome invoca a foto. Só o CSS decide quem é conteúdo e quem
+   é camada de revelação.
+--------------------------------------------------------------------------- */
+const workEl = document.getElementById('work');
 const workGridEl = document.getElementById('work-grid');
 const workListEl = document.getElementById('work-list');
-if (workGridEl && workListEl) {
-  const previewEl = document.getElementById('work-list-preview');
-
-  PROJECT_GROUPS.forEach((group, gi) => {
+if (workEl && workGridEl && workListEl) {
+  PROJECT_GROUPS.forEach(group => {
     const cover = group.photos[0];
-    const coverUrl = projectImgUrl(cover.img, 800);
+    const href = `projeto.html?p=${group.slug}`;
 
-    // grade: miniatura com o nome revelado no hover (giro rotateX);
-    // entra na tela desfocada e revela via observer (classe .in)
-    const card = document.createElement('a');
-    card.className = 'work-card';
-    card.href = `projeto.html?p=${group.slug}`;
+    const gridItem = document.createElement('a');
+    gridItem.className = 'work-grid-item';
+    gridItem.href = href;
+    gridItem.dataset.rel = group.slug;
     const img = document.createElement('img');
-    img.src = coverUrl;
+    img.src = projectImgUrl(cover.img, 900);
     img.alt = cover.alt;
-    img.loading = 'lazy';
-    const name = document.createElement('span');
-    name.className = 'work-name';
-    name.innerHTML = `<span>${group.name}</span>`;
-    card.append(img, name);
-    workGridEl.appendChild(card);
-    observeReveal(card, gi);
+    // sem lazy: as fotos precisam estar prontas pra aparecer no hover da lista
+    gridItem.appendChild(img);
+    workGridEl.appendChild(gridItem);
 
-    // lista: nome grande que revela a foto de capa ao passar o mouse
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `projeto.html?p=${group.slug}`;
-    a.innerHTML = `<span>${group.name}</span>`;
-    function showPreview() { previewEl.src = coverUrl; previewEl.classList.add('is-visible'); }
-    function hidePreview() { previewEl.classList.remove('is-visible'); }
-    a.addEventListener('mouseenter', showPreview);
-    a.addEventListener('mouseleave', hidePreview);
-    a.addEventListener('focus', showPreview);
-    a.addEventListener('blur', hidePreview);
-    li.appendChild(a);
-    workListEl.appendChild(li);
+    const listItem = document.createElement('a');
+    listItem.className = 'work-list-item';
+    listItem.href = href;
+    listItem.dataset.rel = group.slug;
+    listItem.innerHTML = `<span class="work-name">${group.name}</span>`;
+    workListEl.appendChild(listItem);
   });
 
-  const workMain = document.querySelector('.work');
-  const workToggleButtons = document.querySelectorAll('.work-toggle button');
+  const pairs = new Map();
+  [...workGridEl.children, ...workListEl.children].forEach(el => {
+    const rel = el.dataset.rel;
+    if (!pairs.has(rel)) pairs.set(rel, []);
+    pairs.get(rel).push(el);
+  });
+
+  function setHover(rel, on) {
+    pairs.get(rel).forEach(el => {
+      el.classList.toggle('is-hovering', on);
+      // "saindo" existe para o flip continuar o giro pro outro lado em vez
+      // de voltar pelo mesmo caminho; some depois que a transição acaba
+      el.classList.toggle('is-leaving', !on);
+      if (!on) setTimeout(() => el.classList.remove('is-leaving'), 790);
+    });
+  }
+
+  pairs.forEach((els, rel) => {
+    els.forEach(el => {
+      el.addEventListener('mouseenter', () => setHover(rel, true));
+      el.addEventListener('mouseleave', () => setHover(rel, false));
+      el.addEventListener('focus', () => setHover(rel, true));
+      el.addEventListener('blur', () => setHover(rel, false));
+    });
+  });
+
+  const workToggleButtons = [...document.querySelectorAll('.work-toggle button')];
   workToggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      workMain.classList.toggle('view--list', btn.dataset.view === 'list');
+      const list = btn.dataset.view === 'list';
+      workEl.classList.toggle('view--list', list);
+      workEl.classList.toggle('view--grid', !list);
+      // troca de modo com o hover ainda ativo deixaria um par marcado
+      pairs.forEach((_, rel) => setHover(rel, false));
       workToggleButtons.forEach(b => {
         const active = b === btn;
         b.classList.toggle('is-active', active);

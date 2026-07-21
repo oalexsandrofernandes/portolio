@@ -1,48 +1,25 @@
-/* Rene Bieder — Rational, versão licenciada (pedido M7606563, pasta OTF/) */
+/* Rene Bieder — Rational, versão licenciada (pedido M7606563, pasta OTF/).
+   Uma família num único peso em todo o site: é o que sustenta a unidade
+   visual — títulos, corpo, navegação e botões usam exatamente a mesma voz. */
 @font-face{
-  font-family:"Rational Display";
-  src:url("fonts/RationalDisplay-Bold.otf") format("opentype");
-  font-weight:700;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Rational Display";
+  font-family:"Rational";
   src:url("fonts/RationalDisplay-ExtraBold.otf") format("opentype");
-  font-weight:800;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Rational Text";
-  src:url("fonts/RationalText-Light.otf") format("opentype");
-  font-weight:300;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Rational Text";
-  src:url("fonts/RationalText-ExtraBold.otf") format("opentype");
   font-weight:800;
   font-style:normal;
   font-display:swap;
 }
 
 :root{
+  /* duas cores, só. As fotografias carregam toda a cor do site. */
   --paper:#F5F3F0;
-  --paper-2:#E9E7E3;
   --ink:#0C0C0C;
-  --slate:#6B6F76;
-  --blue:var(--ink);
   --rule:rgba(12,12,12,.18);
   --pad:clamp(20px,4vw,56px);
 
-  /* famílias tipográficas — "Rational" (Rene Bieder), fallback Helvetica */
-  --font-family-heading:"Rational Display",Helvetica,sans-serif;
-  --font-family-body:"Rational Text",Helvetica,sans-serif;
-  --font-family-button:"Rational Text",Helvetica,sans-serif;
-  --font-family-nav:"Rational Text",Helvetica,sans-serif;
-  --font-family-input:"Rational Text",Helvetica,sans-serif;
+  /* uma família para tudo */
+  --font-family-heading:"Rational",Helvetica,sans-serif;
+  --font-family-body:"Rational",Helvetica,sans-serif;
+  --font-family-nav:"Rational",Helvetica,sans-serif;
 
   /* escala tipográfica fluida */
   --font-size-h1:clamp(36px,5.5vw,82px);
@@ -54,33 +31,25 @@
   --font-size-medium:clamp(15px,1.2vw,16px);
   --font-size-small:clamp(13px,1vw,15px);
   --font-size-mini:clamp(12px,1vw,13px);
-  --font-size-micro:11px;
+  --font-size-micro:clamp(11px,1vw,11px);
 
   /* tokens de espaçamento — base 0.4rem, múltiplos calculados */
   --space-base:.4rem;
-  --space-0_5:calc(var(--space-base) * 0.5);
   --space-1:var(--space-base);
-  --space-1_5:calc(var(--space-base) * 1.5);
   --space-2:calc(var(--space-base) * 2);
   --space-3:calc(var(--space-base) * 3);
   --space-4:calc(var(--space-base) * 4);
   --space-6:calc(var(--space-base) * 6);
   --space-8:calc(var(--space-base) * 8);
-  --space-12:calc(var(--space-base) * 12);
   --space-16:calc(var(--space-base) * 16);
-  --space-20:calc(var(--space-base) * 20);
   --space-24:calc(var(--space-base) * 24);
   --space-32:calc(var(--space-base) * 32);
 
-  /* layout */
-  --radius:var(--space-base);
-  --grid-gap:calc(var(--space-base) * 3);
-  --sidebar-width:calc(var(--space-base) * 88);
-  --sidebar-padding:calc(var(--space-base) * 8);
+  /* altura e respiro das barras fixas de topo e base */
   --top-bottom-lheight:32px;
   --top-bottom-padding:var(--space-4);
 
-  /* easings reutilizáveis, mesma sensação em toda transição */
+  /* duas curvas definem toda a personalidade do movimento */
   --cubic:cubic-bezier(.77,0,.175,1);
   --cubic-2:cubic-bezier(.5,0,.5,1);
 }
@@ -99,7 +68,7 @@ body{
   overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
 /* home: a página vira um "palco" de altura fixa — wheel/touch movem
    a grade por dentro em vez de rolar o documento */
@@ -107,11 +76,9 @@ body.is-home{overflow:hidden;height:100svh}
 
 .mono{
   font-family:var(--font-family-nav);
-  font-weight:300;
-  font-size:11px;
+  font-size:var(--font-size-micro);
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--slate);
 }
 
 /* ---------- cabeçalho ---------- */
@@ -226,7 +193,7 @@ body.nav-open{overflow:hidden}
   font-size:clamp(15px,1.7vw,24px);letter-spacing:.02em;text-transform:uppercase;
 }
 .navscreen-social{display:flex;gap:var(--space-8)}
-.navscreen-copyright{font-weight:300;text-transform:none;letter-spacing:.02em}
+.navscreen-copyright{letter-spacing:.02em}
 
 /* ---------- home: nome fixo atrás da galeria ---------- */
 .home-name{
@@ -250,11 +217,7 @@ body.nav-open{overflow:hidden}
 
 /* ---------- home: grade "espalhada" ---------- */
 .home-gallery-wrap{position:relative;z-index:2;height:100svh;overflow:hidden}
-/* seletor duplicado de propósito: a regra base .gallery (masonry da página
-   de trabalhos) define column-gap:14px mais abaixo no arquivo e, com a mesma
-   especificidade, venceria esta aqui pela ordem — o .gallery.gallery--home
-   garante que o gap da home é o que vale */
-.gallery.gallery--home{
+.gallery--home{
   --col-gap:6vw;
   --row-gap:22vh;
   --offset-gap:12vh;
@@ -306,9 +269,9 @@ body.has--finished .gallery--home .g-item img{transform:translate(-50%,-50%)}
 body.has--finished .page-veil{backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px)}
 body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 
-@media (max-width:1100px){ .gallery.gallery--home{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:1100px){ .gallery--home{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:768px){
-  .gallery.gallery--home{
+  .gallery--home{
     --col-gap:var(--space-4);--offset-gap:8vh;
     grid-template-columns:repeat(2,1fr);width:100%;left:0;
   }
@@ -317,121 +280,149 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
   .gallery--home .g-item:nth-child(2n){transform:translateY(calc(50% + var(--row-gap) / 2))}
 }
 
-/* base da galeria (a home sobrescreve pra grid) */
-.gallery{column-count:1;column-gap:14px;padding:28px 0 clamp(90px,12vw,150px)}
-.g-item{
-  display:block;break-inside:avoid;margin-bottom:14px;
-  position:relative;overflow:hidden;
-}
+.g-item{display:block;position:relative;overflow:hidden}
 .g-item--skip{height:clamp(40px,7vw,120px)}
-.g-item img{width:100%;height:auto;display:block}
 
-/* ---------- trabalhos: work grid (nome no hover) ---------- */
-/* a folga de baixo precisa cobrir o deslocamento das colunas alternadas
-   (metade da célula + metade do row-gap) mais a barra GRADE/LISTA fixa */
-.work{padding:calc(clamp(20px,4vw,36px) + 32px + 6vh) var(--pad) calc(28vh + 80px)}
-/* mesma linguagem da home — mesmos gaps, mesma proporção natural das fotos,
-   mesmo deslocamento alternado. Menos colunas porque aqui a lista é finita
-   (um card por projeto), não um loop infinito: com 5 colunas sobraria uma
-   única linha e o resto da tela vazio. */
-.work-grid{
-  --col-gap:6vw;
-  --row-gap:16vh;
-  display:grid;grid-template-columns:repeat(3,1fr);
-  column-gap:var(--col-gap);row-gap:var(--row-gap);
-  align-items:center;
-}
-.work-card{
-  position:relative;display:flex;align-items:center;justify-content:center;
-  height:calc(100svh / 2.6 - var(--row-gap) / 2);
-  /* entrada: cada miniatura chega desfocada e "revela" ao entrar na tela */
-  opacity:0;filter:blur(16px);
-  transition:opacity .7s var(--cubic-2),filter .7s var(--cubic-2);
-}
-.work-card.in{opacity:1;filter:blur(0)}
-.work-card:nth-child(3n+2){transform:translateY(calc(50% + var(--row-gap) / 2))}
+/* ================= TRABALHOS: grid ↔ lista como inversão simétrica =========
+   Os dois blocos existem sempre. O que muda entre os modos é apenas quem é
+   conteúdo (no fluxo da página) e quem é camada de revelação (fixa, sobre a
+   tela inteira, sem capturar mouse). Daí a simetria: num modo a foto invoca
+   o nome, no outro o nome invoca a foto.
+   O gesto de revelação é o mesmo em todo o site: giro no eixo X saindo de
+   desfocado para nítido, na curva --cubic.
+========================================================================== */
 
-/* proporção natural da foto, igual à home — retratos e paisagens convivem
-   em formatos diferentes em vez de todos na mesma largura de coluna */
-.work-card img{
-  max-width:110%;max-height:120%;
-  width:auto;height:auto;display:block;
+/* --- gesto compartilhado: escondido / revelando / saindo --- */
+.work-name,
+.view--list .work-grid-item{
+  opacity:0;filter:blur(12px);
+  backface-visibility:hidden;
 }
-
-/* nome no hover: véu de papel sobre a foto e texto em tinta — sem branco
-   nem sombra, que não existem no resto do site */
 .work-name{
-  position:absolute;inset:0;z-index:2;
-  display:flex;align-items:center;justify-content:center;
-  perspective:1000px;text-align:center;padding:0 6%;
-  background:var(--paper);
-  opacity:0;transition:opacity .49s var(--cubic-2);
+  display:inline-block;
+  transform-style:preserve-3d;transform-origin:center center;
+  transform:translateY(50%) rotateX(-90deg);
 }
-.work-card:hover .work-name,
-.work-card:focus-visible .work-name{opacity:.92}
-.work-name>span{
-  display:block;
-  font-family:var(--font-family-heading);font-weight:800;
-  font-size:var(--font-size-h5);letter-spacing:.02em;text-transform:uppercase;
-  color:var(--ink);
-  transform:rotateX(-90deg);
-  transition:transform .49s var(--cubic);
+.is-hovering .work-name,
+.view--list .work-grid-item.is-hovering{
+  transform:none;opacity:1;filter:blur(0);
+  transition:transform .79s var(--cubic),opacity .79s var(--cubic),filter .79s var(--cubic);
 }
-.work-card:hover .work-name>span,
-.work-card:focus-visible .work-name>span{transform:none}
+/* ao sair, o giro continua pro outro lado em vez de voltar pelo mesmo caminho */
+.is-leaving .work-name{
+  transform:translateY(-50%) rotateX(90deg);
+  opacity:0;filter:blur(12px);
+  transition:transform .79s var(--cubic),opacity .79s var(--cubic),filter .79s var(--cubic);
+}
 
-/* ---------- trabalhos: work list (fotos no hover dos nomes) ---------- */
-.work-list{display:none;list-style:none;position:relative;z-index:2;text-align:center;padding:4vh 0}
-.work-list a{
-  display:block;
-  font-family:var(--font-family-heading);font-weight:800;
+/* ---------------- MODO GRADE: fotos são o conteúdo ---------------- */
+.view--grid .work-grid{
+  /* duas colunas largas, com o vão sendo o que sobra da largura útil */
+  --col:36vw;
+  position:relative;
+  display:flex;flex-wrap:wrap;
+  column-gap:calc(88vw - var(--col) * 2);
+  row-gap:32vw;
+  width:88vw;margin:16vw auto 24vw;
+}
+.view--grid .work-grid-item{
+  position:relative;
+  width:var(--col);height:32vw;
+  display:flex;align-items:center;justify-content:center;
+}
+/* itens pares descem: é isso que troca a grade rígida por ritmo vertical */
+.view--grid .work-grid-item:nth-child(even){transform:translateY(calc(50% + 16vw))}
+/* as fotos ficam dentro da própria coluna: temos cinco projetos, não dez,
+   então deixar a foto transbordar até o centro faria ela brigar com o nome
+   revelado, que aparece exatamente ali */
+.view--grid .work-grid-item img{
+  max-width:var(--col);max-height:32vw;
+  width:auto;height:auto;display:block;object-fit:contain;
+}
+
+/* o nome vira camada fixa no centro da tela — a foto continua visível */
+.view--grid .work-list{
+  position:fixed;top:50%;left:50%;z-index:40;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.view--grid .work-list-item{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:90vw;text-align:center;
+  perspective:1000px;
+}
+.view--grid .work-name{
+  font-family:var(--font-family-heading);
+  font-size:var(--font-size-h2);line-height:1.1;
+  letter-spacing:.02em;text-transform:uppercase;
+}
+
+/* ---------------- MODO LISTA: nomes são o conteúdo ---------------- */
+.view--list .work-list{
+  position:relative;z-index:2;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:calc(var(--top-bottom-lheight) + var(--top-bottom-padding) * 2) var(--pad);
+}
+.view--list .work-list-item{
+  perspective:1000px;text-align:center;
+  padding-bottom:var(--space-2);margin-bottom:var(--space-2);
+  border-bottom:3px solid transparent;
+  transition:border-color .49s var(--cubic);
+}
+.view--list .work-list-item:hover{border-bottom-color:var(--ink)}
+.view--list .work-name{
+  /* aqui o nome é conteúdo, não revelação: entra em cascata no load e fica */
+  font-family:var(--font-family-heading);
   font-size:var(--font-size-h2);line-height:1.12;
   letter-spacing:.02em;text-transform:uppercase;
-  color:var(--ink);transition:opacity .25s ease;
 }
-.work-list li:hover a{opacity:1}
-.work-list:hover a{opacity:.3}
-.work-list li a:hover{opacity:1}
-
-/* entrada dos nomes ao trocar pro modo lista: sobem em cascata */
-@keyframes list-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-.work.view--list .work-list li{animation:list-rise .6s var(--cubic) both}
-.work.view--list .work-list li:nth-child(1){animation-delay:.03s}
-.work.view--list .work-list li:nth-child(2){animation-delay:.08s}
-.work.view--list .work-list li:nth-child(3){animation-delay:.13s}
-.work.view--list .work-list li:nth-child(4){animation-delay:.18s}
-.work.view--list .work-list li:nth-child(5){animation-delay:.23s}
-
-/* preview: a foto entra e sai desfocando, não só com fade */
-.work-list-preview{
-  position:fixed;top:50%;left:50%;z-index:1;
-  transform:translate(-50%,-50%);
-  max-width:34vw;max-height:56vh;width:auto;height:auto;
-  opacity:0;filter:blur(18px);pointer-events:none;
-  transition:opacity .45s var(--cubic-2),filter .45s var(--cubic-2);
+body.has--finished .view--list .work-name{
+  transform:none;opacity:1;filter:blur(0);
+  transition:transform .79s var(--cubic),opacity .79s var(--cubic),filter .79s var(--cubic);
 }
-.work-list-preview.is-visible{opacity:1;filter:blur(0)}
-.work.view--list .work-grid{display:none}
-.work.view--list .work-list{display:block}
+.view--list .work-list-item:nth-child(1) .work-name{transition-delay:0s}
+.view--list .work-list-item:nth-child(2) .work-name{transition-delay:.03s}
+.view--list .work-list-item:nth-child(3) .work-name{transition-delay:.06s}
+.view--list .work-list-item:nth-child(4) .work-name{transition-delay:.09s}
+.view--list .work-list-item:nth-child(5) .work-name{transition-delay:.12s}
 
-/* alternador GRADE/LISTA fixo na base, como a barra da referência */
-/* fundo com blur igual ao da barra da página de projeto: sem ele o
-   conteúdo passa por baixo durante a rolagem e o texto some */
+/* as fotos viram camada fixa; ímpares à esquerda, pares à direita */
+.view--list .work-grid{
+  position:fixed;inset:0;z-index:1;
+  pointer-events:none;
+}
+.view--list .work-grid-item{
+  position:absolute;top:50%;
+  left:var(--space-24);
+  width:24vw;height:24vw;
+  transform:translateY(-50%);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .49s ease,filter .49s ease;
+}
+.view--list .work-grid-item:nth-child(even){left:auto;right:var(--space-24)}
+.view--list .work-grid-item img{
+  max-width:33.6vw;max-height:33.6vw;
+  width:auto;height:auto;display:block;object-fit:contain;
+}
+
+/* ---------------- alternador GRADE / LISTA ---------------- */
 .work-toggle{
-  position:fixed;left:50%;bottom:clamp(16px,2.5vw,28px);z-index:60;
+  position:fixed;left:50%;bottom:var(--top-bottom-padding);z-index:60;
   transform:translateX(-50%);
-  display:flex;gap:var(--space-2);align-items:center;
-  padding:10px 22px;border-radius:999px;
-  background:rgba(245,243,240,.82);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:flex;gap:var(--space-8);align-items:center;
 }
 .work-toggle button{
-  font-family:var(--font-family-nav);font-weight:300;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  background:none;border:none;cursor:pointer;color:var(--slate);padding:2px 0;
-  transition:color .25s ease;
+  font-family:var(--font-family-nav);
+  font-size:var(--font-size-h4);line-height:var(--top-bottom-lheight);
+  letter-spacing:.02em;text-transform:uppercase;
+  background:none;border:none;cursor:pointer;color:var(--ink);
+  border-bottom:2px solid transparent;
+  transition:border-color .49s var(--cubic);
 }
-.work-toggle button:hover{color:var(--ink)}
-.work-toggle button.is-active{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.work-toggle button:hover,
+.work-toggle button.is-active{border-bottom-color:var(--ink)}
 
 /* ---------- projeto (foco): título + filmstrip + imagem principal ---------- */
 .project-focus{
@@ -454,7 +445,7 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 .project-thumb{
   display:block;width:100%;aspect-ratio:3/4;padding:0;border:none;
   background:none;cursor:pointer;overflow:hidden;border-radius:2px;
-  opacity:.45;transition:opacity .25s ease;
+  opacity:.45;transition:opacity .49s var(--cubic);
 }
 .project-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .project-thumb:hover,.project-thumb.is-active{opacity:1}
@@ -470,11 +461,13 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
   border-top:1px solid var(--rule);
 }
 .project-bar button,.project-bar a{
-  font-family:var(--font-family-nav);font-weight:300;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  background:none;border:none;cursor:pointer;color:var(--slate);
-  transition:color .25s ease;
+  font-family:var(--font-family-nav);
+  font-size:var(--font-size-micro);letter-spacing:.12em;text-transform:uppercase;
+  background:none;border:none;cursor:pointer;color:var(--ink);
+  border-bottom:2px solid transparent;
+  transition:border-color .49s var(--cubic);
 }
-.project-bar button:hover,.project-bar a:hover,.project-bar button[aria-pressed="true"]{color:var(--ink)}
+.project-bar button:hover,.project-bar a:hover,.project-bar button[aria-pressed="true"]{border-bottom-color:var(--ink)}
 
 .project-info-panel{
   position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:19;
@@ -491,7 +484,7 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 }
 
 /* ---------- revelação no scroll ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .79s var(--cubic),transform .79s var(--cubic)}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- responsivo ---------- */

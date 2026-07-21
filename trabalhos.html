@@ -13,7 +13,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projetos — Alexsandro Fernandes</title>
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body class="is-work">
 
@@ -42,22 +42,25 @@
   </div>
 </div>
 
-<!-- ---------------- WORK: GRADE + LISTA ---------------- -->
-<main class="work">
+<!-- ----------------------------------------------------------------
+  WORK: os dois conjuntos vivem sempre no DOM ao mesmo tempo — as fotos
+  em .work-grid e os nomes em .work-list — pareados pelo data-rel. A
+  classe view--grid / view--list decide qual dos dois é o conteúdo e
+  qual vira a camada de revelação no hover. Não são dois layouts: é a
+  mesma estrutura espelhada.
+----------------------------------------------------------------- -->
+<main class="work view--grid" id="work">
   <div class="work-grid" id="work-grid"></div>
-  <ul class="work-list" id="work-list"></ul>
+  <div class="work-list" id="work-list"></div>
 </main>
 
-<img class="work-list-preview" id="work-list-preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-
-<div class="work-toggle" role="group" aria-label="Alternar visualização">
+<nav class="work-toggle" aria-label="Alternar visualização">
   <button type="button" class="is-active" data-view="grid" aria-pressed="true">Grade</button>
-  <span class="mono" aria-hidden="true">/</span>
   <button type="button" data-view="list" aria-pressed="false">Lista</button>
-</div>
+</nav>
 
 <div class="page-veil" aria-hidden="true"></div>
 
-<script src="script.js?v=8"></script>
+<script src="script.js?v=9"></script>
 </body>
 </html>
