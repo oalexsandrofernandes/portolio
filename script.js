@@ -102,10 +102,10 @@ const PROJECT_GROUPS = PROJECTS.reduce((groups, item) => {
   return groups;
 }, []);
 
-function buildGalleryItem(item, key, { caption = true } = {}) {
+function buildGalleryItem(item, key, { caption = true, href = '#' } = {}) {
   const a = document.createElement('a');
   a.className = 'g-item reveal';
-  a.href = '#';
+  a.href = href;
   a.dataset.project = item.work;
 
   const img = document.createElement('img');
@@ -225,9 +225,14 @@ if (homeGalleryEl) {
   const CYCLES = PROJECTS.length >= 40 ? 1 : 3;
   let index = 0;
   const periodFrag = document.createDocumentFragment();
+  /* a grade repete a lista, então o índice cresce além do acervo — o link
+     precisa apontar pra posição real da foto na galeria, não pra repetição */
+  const linkGaleria = i => `galeria.html?foto=${i % PROJECTS.length}`;
+
   for (let c = 0; c < CYCLES; c++) {
     PROJECTS.forEach(item => {
-      const el = buildGalleryItem(item, index, { caption: false }); // home: só foto, sem legenda
+      // home: só foto, sem legenda; clicar abre a galeria já nesta foto
+      const el = buildGalleryItem(item, index, { caption: false, href: linkGaleria(index) });
       el.classList.remove('reveal'); // a home usa reveal em cascata próprio, não o scroll-spy genérico
       periodFrag.appendChild(el);
       index++;
@@ -250,7 +255,7 @@ if (homeGalleryEl) {
   const LOOP_MULTIPLE = 30; // mmc(5, 3, 2)
   while (periodFrag.children.length % LOOP_MULTIPLE !== 0) {
     const item = PROJECTS[index % PROJECTS.length];
-    const el = buildGalleryItem(item, index, { caption: false });
+    const el = buildGalleryItem(item, index, { caption: false, href: linkGaleria(index) });
     el.classList.remove('reveal');
     periodFrag.appendChild(el);
     index++;
@@ -463,13 +468,23 @@ function criarGaleriaScroll({
 
 const galeriaThumbsEl = document.getElementById('galeria-thumbs');
 if (galeriaThumbsEl) {
-  criarGaleriaScroll({
+  const galeria = criarGaleriaScroll({
     trilhoEl: document.getElementById('galeria'),
     thumbsEl: galeriaThumbsEl,
     focusEl: document.getElementById('galeria-focus'),
     captionEl: document.getElementById('galeria-caption'),
     fotos: PROJECTS,
   });
+
+  /* clicar numa foto da home abre a galeria já nela: ?foto=<índice>.
+     Espera o load porque as alturas das miniaturas — e portanto a posição
+     do trilho — só são confiáveis com as imagens já dimensionadas. */
+  const pedida = parseInt(new URLSearchParams(location.search).get('foto'), 10);
+  if (Number.isInteger(pedida) && pedida >= 0 && pedida < PROJECTS.length) {
+    const irAteAFoto = () => galeria.posicionar(pedida);
+    if (document.readyState === 'complete') irAteAFoto();
+    else window.addEventListener('load', () => requestAnimationFrame(irAteAFoto));
+  }
 }
 
 /* ---------------- página da obra: mesma galeria + Info e Índice ---------------- */
