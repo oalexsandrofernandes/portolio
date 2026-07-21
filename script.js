@@ -323,25 +323,33 @@ if (homeGalleryEl) {
    horizontal de cada miniatura. A suavidade toda vem dessa perseguição —
    não há transição de CSS no transform, senão as duas brigariam.
 ---------------------------------------------------------------- */
-const galeriaThumbsEl = document.getElementById('galeria-thumbs');
-const galeriaFocusEl = document.getElementById('galeria-focus');
-if (galeriaThumbsEl && galeriaFocusEl) {
-  const captionEl = document.getElementById('galeria-caption');
-  const SCROLL_POR_FOTO = 110; // altura de rolagem que cada foto ocupa no trilho
+function criarGaleriaScroll({
+  trilhoEl, thumbsEl, focusEl, captionEl, fotos,
+  legenda = item => `${item.work} · ${item.architect}, ${item.year} · foto: ${item.credit} (${item.license})`,
+  rotuloThumb = item => item.work,
+  alturaPorFoto = 110,
+  avancoMax = 64,
+  larguraCurva = 1.3,
+  suavizacao = 0.1,
+}) {
+  // com uma foto só não há percurso: todo divisor precisa respeitar isso
+  const vao = fotos.length - 1;
+  const passo = () => (typeof alturaPorFoto === 'function' ? alturaPorFoto() : alturaPorFoto);
 
   const thumbs = [];
   const focos = [];
-  PROJECTS.forEach((item, i) => {
+  fotos.forEach((item, i) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'galeria-thumb';
-    btn.setAttribute('aria-label', item.work);
+    btn.style.setProperty('--i', i); // usado pela cascata do modo índice
+    btn.setAttribute('aria-label', rotuloThumb(item, i));
     const t = document.createElement('img');
     t.src = item.img;
     t.alt = '';
     btn.appendChild(t);
     btn.addEventListener('click', () => irPara(i));
-    galeriaThumbsEl.appendChild(btn);
+    thumbsEl.appendChild(btn);
     thumbs.push(btn);
 
     const foco = document.createElement('div');
@@ -351,18 +359,27 @@ if (galeriaThumbsEl && galeriaFocusEl) {
     f.alt = item.alt;
     // sem lazy: a troca no scroll precisa ser instantânea
     foco.appendChild(f);
-    galeriaFocusEl.appendChild(foco);
+    focusEl.appendChild(foco);
     focos.push(foco);
   });
 
-  const galeriaEl = document.getElementById('galeria');
-  const railTotal = () => PROJECTS.length * SCROLL_POR_FOTO + window.innerHeight;
-  function medirTrilho() { galeriaEl.style.height = railTotal() + 'px'; }
+  const railTotal = () => (vao > 0 ? fotos.length * passo() + window.innerHeight : window.innerHeight);
+  function medirTrilho() { trilhoEl.style.height = railTotal() + 'px'; }
   medirTrilho();
 
-  function irPara(i) {
+  function topoDe(i) {
     const max = railTotal() - window.innerHeight;
-    window.scrollTo({ top: (i / (PROJECTS.length - 1)) * max, behavior: reduce ? 'auto' : 'smooth' });
+    return vao > 0 ? (i / vao) * max : 0;
+  }
+  function irPara(i) {
+    window.scrollTo({ top: topoDe(i), behavior: reduce ? 'auto' : 'smooth' });
+  }
+  /* teleporte: rola sem animação E sincroniza o lerp na mesma operação, senão
+     o cross-fade varre todas as fotos do caminho até chegar na escolhida */
+  function posicionar(i) {
+    window.scrollTo({ top: topoDe(i), behavior: 'auto' });
+    atual = i;
+    desenhar(i);
   }
 
   /* centro de cada miniatura na coluna, para poder alinhá-la ao meio da tela.
@@ -372,105 +389,198 @@ if (galeriaThumbsEl && galeriaFocusEl) {
   function medirCentros() {
     centros = thumbs.map(t => t.offsetTop + t.offsetHeight / 2);
   }
+  function remedir() { medirCentros(); medirTrilho(); }
   medirCentros();
-  window.addEventListener('load', () => { medirCentros(); medirTrilho(); });
-  window.addEventListener('resize', () => { medirCentros(); medirTrilho(); });
+  window.addEventListener('load', remedir);
+  window.addEventListener('resize', () => { if (!pausado) remedir(); });
 
   let atual = 0;
   let ativoAnterior = -1;
+  let pausado = false;
 
   function desenhar(indice) {
-    const n = PROJECTS.length;
+    const n = fotos.length;
     const piso = Math.max(0, Math.min(n - 1, Math.floor(indice)));
     const teto = Math.min(n - 1, piso + 1);
     const fracao = indice - piso;
 
-    // coluna: interpola entre os centros vizinhos e alinha ao meio da tela
+    /* posição e avanço saem como custom properties, não como transform inline:
+       assim as regras de estado (modo índice) vencem por serem CSS contra CSS,
+       em vez de disputar com um estilo inline reescrito a cada quadro */
     const centro = centros[piso] + (centros[teto] - centros[piso]) * fracao;
-    galeriaThumbsEl.style.transform = `translateY(${window.innerHeight / 2 - centro}px)`;
+    thumbsEl.style.setProperty('--deslocamento', (window.innerHeight / 2 - centro) + 'px');
 
-    // curva de sino: a miniatura ativa avança ~64px, as vizinhas bem menos
+    // curva de sino: a miniatura ativa avança ao máximo, as vizinhas bem menos
     thumbs.forEach((t, i) => {
       const d = i - indice;
-      const avanco = 64 * Math.exp(-(d * d) / 1.3);
-      t.style.transform = `translateX(${avanco - 112}px)`;
+      t.style.setProperty('--avanco', (avancoMax * Math.exp(-(d * d) / larguraCurva)) + 'px');
     });
 
     const ativo = Math.round(indice);
     if (ativo !== ativoAnterior) {
       thumbs.forEach((t, i) => t.classList.toggle('is-active', i === ativo));
       focos.forEach((f, i) => f.classList.toggle('is-active', i === ativo));
-      const item = PROJECTS[ativo];
-      captionEl.textContent = `${item.work} · ${item.architect}, ${item.year} · foto: ${item.credit} (${item.license})`;
+      if (captionEl) captionEl.textContent = legenda(fotos[ativo], ativo);
       ativoAnterior = ativo;
     }
   }
 
   function alvo() {
     const max = railTotal() - window.innerHeight;
-    return max > 0 ? (window.scrollY / max) * (PROJECTS.length - 1) : 0;
+    return (vao > 0 && max > 0) ? (window.scrollY / max) * vao : 0;
   }
 
-  if (reduce) {
+  if (reduce || vao === 0) {
     desenhar(0);
-    window.addEventListener('scroll', () => desenhar(alvo()), { passive: true });
+    if (vao > 0) window.addEventListener('scroll', () => desenhar(alvo()), { passive: true });
   } else {
     (function raf() {
-      atual += (alvo() - atual) * 0.1;
-      desenhar(atual);
+      if (!pausado) {
+        atual += (alvo() - atual) * suavizacao;
+        desenhar(atual);
+      }
       requestAnimationFrame(raf);
     })();
   }
+
+  return {
+    irPara, posicionar, remedir,
+    indiceAtivo: () => Math.round(atual),
+    pausar() { pausado = true; },
+    /* a ordem importa: só dá pra medir os centros depois que o layout voltou
+       a ser coluna, senão guardamos as posições da grade e a coluna salta */
+    retomar() {
+      void thumbsEl.offsetHeight; // força o reflow antes de medir
+      medirCentros();
+      medirTrilho();
+      atual = alvo();
+      ativoAnterior = -1;
+      desenhar(atual);
+      pausado = false;
+    },
+  };
 }
 
-/* ---------------- página projeto.html: filmstrip + imagem principal ---------------- */
-const projectTitleEl = document.getElementById('project-title');
-if (projectTitleEl) {
+const galeriaThumbsEl = document.getElementById('galeria-thumbs');
+if (galeriaThumbsEl) {
+  criarGaleriaScroll({
+    trilhoEl: document.getElementById('galeria'),
+    thumbsEl: galeriaThumbsEl,
+    focusEl: document.getElementById('galeria-focus'),
+    captionEl: document.getElementById('galeria-caption'),
+    fotos: PROJECTS,
+  });
+}
+
+/* ---------------- página da obra: mesma galeria + Info e Índice ---------------- */
+const projetoThumbsEl = document.getElementById('projeto-thumbs');
+if (projetoThumbsEl) {
   const slug = new URLSearchParams(location.search).get('p');
   const group = PROJECT_GROUPS.find(g => g.slug === slug) || PROJECT_GROUPS[0];
+  const total = group.photos.length;
 
   document.getElementById('project-page-title').textContent = `${group.name} — ${group.architect}`;
-  projectTitleEl.textContent = group.name;
-  document.getElementById('project-info-name').textContent =
-    `${group.architect}, ${group.year} — ${group.city}`;
 
-  const filmstripEl = document.getElementById('project-filmstrip');
-  const mainImgEl = document.getElementById('project-main-img');
-  const creditEl = document.getElementById('project-credit');
-
-  /* o crédito é por FOTO, não por obra: cada imagem tem seu fotógrafo e
-     sua licença, então ele é reescrito a cada troca do filmstrip */
-  function showPhoto(i) {
-    const photo = group.photos[i];
-    mainImgEl.src = photo.img;
-    mainImgEl.alt = photo.alt;
-    creditEl.innerHTML =
-      `Foto: ${photo.credit} · <a href="${photo.source}" target="_blank" rel="noopener">${photo.license}</a>`;
-    [...filmstripEl.children].forEach((btn, bi) => btn.classList.toggle('is-active', bi === i));
-  }
-
-  group.photos.forEach((photo, i) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'project-thumb';
-    btn.setAttribute('aria-label', `${group.name} — foto ${i + 1}`);
-    const img = document.createElement('img');
-    img.src = photo.img;
-    img.alt = '';
-    img.loading = 'lazy';
-    btn.append(img);
-    btn.addEventListener('click', () => showPhoto(i));
-    filmstripEl.appendChild(btn);
+  const galeria = criarGaleriaScroll({
+    trilhoEl: document.getElementById('projeto'),
+    thumbsEl: projetoThumbsEl,
+    focusEl: document.getElementById('projeto-focus'),
+    captionEl: document.getElementById('projeto-caption'),
+    fotos: group.photos,
+    // com 2 a 5 fotos, uma altura fixa por foto daria um percurso curto demais
+    alturaPorFoto: () => window.innerHeight * 0.7,
+    rotuloThumb: (_, i) => `${group.name} — foto ${i + 1} de ${total}`,
+    legenda: (foto, i) => `${group.name} · foto ${i + 1}/${total} · ${foto.credit} (${foto.license})`,
   });
 
-  showPhoto(0);
+  /* ---- ficha técnica (Info) ---- */
+  const infoEl = document.getElementById('projeto-info');
+  document.getElementById('projeto-info-obra').textContent = group.name;
+  document.getElementById('projeto-info-autoria').textContent =
+    `${group.architect} · ${group.year} · ${group.city}`;
+  document.getElementById('projeto-info-fotos').textContent =
+    total === 1 ? '1 fotografia' : `${total} fotografias`;
 
-  const infoBtn = document.getElementById('project-info-btn');
-  const infoPanel = document.getElementById('project-info-panel');
+  /* os créditos ficam fora do splitLines: ele zera o textContent e destruiria
+     os links de licença. Cada linha é montada à mão, com o mesmo escalonamento. */
+  const creditosEl = document.getElementById('projeto-info-creditos');
+  const vistos = new Set();
+  group.photos.forEach(foto => {
+    const chave = foto.credit + '|' + foto.license;
+    if (vistos.has(chave)) return;
+    vistos.add(chave);
+    const linha = document.createElement('p');
+    linha.className = 'line';
+    const inner = document.createElement('span');
+    inner.className = 'line__inner';
+    inner.innerHTML = `foto: ${foto.credit} · <a href="${foto.source}" target="_blank" rel="noopener">${foto.license}</a>`;
+    linha.appendChild(inner);
+    creditosEl.appendChild(linha);
+  });
+
+  function escalonarInfo() {
+    [...infoEl.querySelectorAll('.line__inner')].forEach((el, i) => {
+      el.style.transitionDelay = (0.08 + i * 0.045) + 's';
+    });
+  }
+
+  /* ---- alternância dos dois estados ---- */
+  const infoBtn = document.getElementById('projeto-info-btn');
+  const indexBtn = document.getElementById('projeto-index-btn');
+  const body = document.body;
+
+  function marcar(btn, ligado) { btn.setAttribute('aria-pressed', String(ligado)); }
+
+  function abrirInfo() {
+    fecharIndex();
+    body.classList.add('is-info');
+    marcar(infoBtn, true);
+    // medir com o painel já visível, senão a largura é zero e vira uma linha só
+    if (!reduce) {
+      infoEl.querySelectorAll('.projeto-info-obra, .projeto-info-linha')
+            .forEach(p => splitLines(p, { passo: 0.045 }));
+    }
+    escalonarInfo();
+  }
+  function fecharInfo() {
+    body.classList.remove('is-info');
+    marcar(infoBtn, false);
+  }
+  function abrirIndex() {
+    fecharInfo();
+    galeria.pausar();
+    body.classList.add('is-index');
+    marcar(indexBtn, true);
+  }
+  function fecharIndex() {
+    if (!body.classList.contains('is-index')) return;
+    body.classList.remove('is-index');
+    marcar(indexBtn, false);
+    galeria.retomar();
+  }
+
   infoBtn.addEventListener('click', () => {
-    const open = infoBtn.getAttribute('aria-pressed') === 'true';
-    infoBtn.setAttribute('aria-pressed', String(!open));
-    infoPanel.hidden = open;
+    body.classList.contains('is-info') ? fecharInfo() : abrirInfo();
+  });
+  indexBtn.addEventListener('click', () => {
+    body.classList.contains('is-index') ? fecharIndex() : abrirIndex();
+  });
+
+  /* clicar numa miniatura no modo índice fecha a grade e salta pra foto —
+     posicionar() teleporta em vez de rolar, pra não varrer as do caminho */
+  projetoThumbsEl.addEventListener('click', e => {
+    if (!body.classList.contains('is-index')) return;
+    const btn = e.target.closest('.galeria-thumb');
+    if (!btn) return;
+    const i = [...projetoThumbsEl.children].indexOf(btn);
+    fecharIndex();
+    requestAnimationFrame(() => galeria.posicionar(i));
+  }, true);
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (body.classList.contains('is-info')) fecharInfo();
+    else if (body.classList.contains('is-index')) fecharIndex();
   });
 
   const backLink = document.getElementById('project-back');
@@ -493,46 +603,49 @@ root.dataset.theme = 'light';
 root.classList.remove('is-monochrome');
 
 /* ---------------- navscreen: menu de tela cheia (botão +/×) ---------------- */
+/* quebra o parágrafo em linhas medidas de verdade (por offsetTop) e embrulha
+   cada uma em .line > .line__inner pro reveal linha a linha.
+   ATENÇÃO: zera o textContent, então destrói qualquer elemento filho — não
+   passe por aqui um trecho que contenha link. Precisa ser chamada com o
+   elemento já visível, senão a largura é zero e tudo vira uma linha só. */
+function splitLines(el, { base = 0.08, passo = 0.06 } = {}) {
+  if (!el || el.dataset.split === '1') return;
+  const words = el.textContent.trim().split(/\s+/);
+  el.textContent = '';
+  const probe = words.map(w => {
+    const s = document.createElement('span');
+    s.style.display = 'inline-block';
+    s.textContent = w;
+    el.appendChild(s);
+    el.appendChild(document.createTextNode(' '));
+    return s;
+  });
+  const lines = [];
+  let lastTop = null;
+  probe.forEach(s => {
+    const t = s.offsetTop;
+    if (lastTop === null || t - lastTop > 1) { lines.push([]); lastTop = t; }
+    lines[lines.length - 1].push(s.textContent);
+  });
+  el.textContent = '';
+  lines.forEach((ws, i) => {
+    const line = document.createElement('span');
+    line.className = 'line';
+    const inner = document.createElement('span');
+    inner.className = 'line__inner';
+    inner.style.transitionDelay = (base + i * passo) + 's';
+    inner.textContent = ws.join(' ');
+    line.appendChild(inner);
+    el.appendChild(line);
+  });
+  el.dataset.split = '1';
+}
+
 const navOpener = document.getElementById('nav-opener');
 const navscreen = document.getElementById('navscreen');
 if (navOpener && navscreen) {
   const aboutEl = navscreen.querySelector('.navscreen-about');
   let closeTimer = null;
-
-  // quebra o parágrafo em linhas medidas de verdade (por offsetTop) e
-  // embrulha cada uma em .line > .line__inner pro reveal linha a linha
-  function splitLines(el) {
-    if (!el || el.dataset.split === '1') return;
-    const words = el.textContent.trim().split(/\s+/);
-    el.textContent = '';
-    const probe = words.map(w => {
-      const s = document.createElement('span');
-      s.style.display = 'inline-block';
-      s.textContent = w;
-      el.appendChild(s);
-      el.appendChild(document.createTextNode(' '));
-      return s;
-    });
-    const lines = [];
-    let lastTop = null;
-    probe.forEach(s => {
-      const t = s.offsetTop;
-      if (lastTop === null || t - lastTop > 1) { lines.push([]); lastTop = t; }
-      lines[lines.length - 1].push(s.textContent);
-    });
-    el.textContent = '';
-    lines.forEach((ws, i) => {
-      const line = document.createElement('span');
-      line.className = 'line';
-      const inner = document.createElement('span');
-      inner.className = 'line__inner';
-      inner.style.transitionDelay = (0.08 + i * 0.06) + 's';
-      inner.textContent = ws.join(' ');
-      line.appendChild(inner);
-      el.appendChild(line);
-    });
-    el.dataset.split = '1';
-  }
 
   function openNav() {
     clearTimeout(closeTimer);

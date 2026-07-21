@@ -14,9 +14,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title id="project-page-title">Projeto — Alexsandro Fernandes</title>
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="style.css?v=14">
 </head>
-<body>
+<body class="is-projeto">
 
 <header class="site-header">
   <button type="button" class="nav-opener" id="nav-opener" aria-expanded="false" aria-controls="navscreen" aria-label="Menu">
@@ -44,30 +44,37 @@
   </div>
 </div>
 
-<!-- ---------------- PROJETO: TÍTULO + FILMSTRIP + IMAGEM PRINCIPAL ---------------- -->
-<section class="project-focus">
-  <h1 class="project-focus-title" id="project-title"></h1>
-  <div class="project-stage">
-    <nav class="project-filmstrip" id="project-filmstrip" aria-label="Fotos do projeto"></nav>
-    <div class="project-main">
-      <img id="project-main-img" src="" alt="">
-    </div>
+<!-- ----------------------------------------------------------------
+  A obra usa o mesmo motor da galeria, alimentado só pelas fotos dela.
+  Os estados Info e Índice são classes no <body> (is-info / is-index),
+  não páginas novas — por isso a barra, o véu e o painel ficam fora da
+  seção, como irmãos dela.
+----------------------------------------------------------------- -->
+<section class="galeria" id="projeto">
+  <div class="galeria-thumbs">
+    <div class="galeria-thumbs-list" id="projeto-thumbs"></div>
   </div>
+  <div class="galeria-focus" id="projeto-focus"></div>
+  <p class="galeria-caption" id="projeto-caption"></p>
 </section>
 
-<div class="project-info-panel" id="project-info-panel" hidden>
-  <span class="mono" id="project-info-name"></span>
-  <span class="mono" id="project-credit"></span>
+<div class="projeto-veil" aria-hidden="true"></div>
+
+<div class="projeto-info" id="projeto-info" role="dialog" aria-label="Ficha técnica">
+  <p class="projeto-info-obra" id="projeto-info-obra"></p>
+  <p class="projeto-info-linha" id="projeto-info-autoria"></p>
+  <p class="projeto-info-linha" id="projeto-info-fotos"></p>
+  <div class="projeto-info-creditos" id="projeto-info-creditos"></div>
 </div>
 
 <nav class="project-bar mono">
-  <button type="button" id="project-info-btn" aria-pressed="false">Info</button>
-  <a href="trabalhos.html">Index</a>
+  <button type="button" id="projeto-info-btn" aria-pressed="false">Info</button>
+  <button type="button" id="projeto-index-btn" aria-pressed="false">Index</button>
   <a href="trabalhos.html" id="project-back">Back</a>
 </nav>
 
 <div class="page-veil" aria-hidden="true"></div>
 
-<script src="script.js?v=13"></script>
+<script src="script.js?v=14"></script>
 </body>
 </html>
