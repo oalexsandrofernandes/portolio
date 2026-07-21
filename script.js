@@ -20,57 +20,36 @@ const PROJECTS = [
   { work: "Museu Brasileiro da Escultura", architect: "Paulo Mendes da Rocha", year: "1988", city: "São Paulo", img: "img/obras/museu-brasileiro-da-escultura-1.jpg", alt: "Museu Brasileiro da Escultura, de Paulo Mendes da Rocha (1988)", credit: "seier+seier", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3APaulo%20mendes%20da%20rocha%2C%20sao%20paulo%20april%202006%20(493990086).jpg" },
   { work: "Museu Brasileiro da Escultura", architect: "Paulo Mendes da Rocha", year: "1988", city: "São Paulo", img: "img/obras/museu-brasileiro-da-escultura-2.jpg", alt: "Museu Brasileiro da Escultura, de Paulo Mendes da Rocha (1988)", credit: "Ghiraldini", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3A%C3%81rea%20externa%20com%20bruma.jpg" },
   { work: "Museu Brasileiro da Escultura", architect: "Paulo Mendes da Rocha", year: "1988", city: "São Paulo", img: "img/obras/museu-brasileiro-da-escultura-3.jpg", alt: "Museu Brasileiro da Escultura, de Paulo Mendes da Rocha (1988)", credit: "Ghiraldini", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3A%C3%81rea%20externa%2C%20MuBE.jpg" },
-  { work: "Pinacoteca do Estado", architect: "Paulo Mendes da Rocha", year: "1998", city: "São Paulo", img: "img/obras/pinacoteca-do-estado-1.jpg", alt: "Pinacoteca do Estado, de Paulo Mendes da Rocha (1998)", credit: "Juliobuenophotography", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APinacoteca%20-%20S%C3%A3o%20Paulo%20(3).jpg" },
   { work: "Pinacoteca do Estado", architect: "Paulo Mendes da Rocha", year: "1998", city: "São Paulo", img: "img/obras/pinacoteca-do-estado-2.jpg", alt: "Pinacoteca do Estado, de Paulo Mendes da Rocha (1998)", credit: "Paulo SP/ Wikimedia", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APinacoteca%20do%20Estado%20de%20S%C3%A3o%20Paulo%2C%20Luz%2C%20S%C3%A3o%20Paulo%20-%202023-10-30%20-%20DSC09050.jpg" },
-  { work: "Pinacoteca do Estado", architect: "Paulo Mendes da Rocha", year: "1998", city: "São Paulo", img: "img/obras/pinacoteca-do-estado-3.jpg", alt: "Pinacoteca do Estado, de Paulo Mendes da Rocha (1998)", credit: "Maria Lucia P. Sampaio", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APinacoteca%20(1).jpg" },
-  { work: "Pinacoteca do Estado", architect: "Paulo Mendes da Rocha", year: "1998", city: "São Paulo", img: "img/obras/pinacoteca-do-estado-4.jpg", alt: "Pinacoteca do Estado, de Paulo Mendes da Rocha (1998)", credit: "Orlando Tadeu", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AFachada%20da%20Pinacoteca.jpg" },
   { work: "Pinacoteca do Estado", architect: "Paulo Mendes da Rocha", year: "1998", city: "São Paulo", img: "img/obras/pinacoteca-do-estado-5.jpg", alt: "Pinacoteca do Estado, de Paulo Mendes da Rocha (1998)", credit: "Janaina de cassia", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APinacoteca.angulo2.jpg" },
-  { work: "Estádio Serra Dourada", architect: "Paulo Mendes da Rocha", year: "1975", city: "Goiânia", img: "img/obras/estadio-serra-dourada-1.jpg", alt: "Estádio Serra Dourada, de Paulo Mendes da Rocha (1975)", credit: "Adelano Lázaro", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3ASerradourada01.jpg" },
   { work: "Estádio Serra Dourada", architect: "Paulo Mendes da Rocha", year: "1975", city: "Goiânia", img: "img/obras/estadio-serra-dourada-2.jpg", alt: "Estádio Serra Dourada, de Paulo Mendes da Rocha (1975)", credit: "JorgeBrazil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEst%C3%A1dio%20Serra%20Dourada1.jpg" },
   { work: "Estádio Serra Dourada", architect: "Paulo Mendes da Rocha", year: "1975", city: "Goiânia", img: "img/obras/estadio-serra-dourada-3.jpg", alt: "Estádio Serra Dourada, de Paulo Mendes da Rocha (1975)", credit: "JorgeBrazil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEst%C3%A1dio%20Serra%20Dourada2.jpg" },
   { work: "Estádio Serra Dourada", architect: "Paulo Mendes da Rocha", year: "1975", city: "Goiânia", img: "img/obras/estadio-serra-dourada-4.jpg", alt: "Estádio Serra Dourada, de Paulo Mendes da Rocha (1975)", credit: "JorgeBrazil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEst%C3%A1dio%20Serra%20Dourada3.jpg" },
-  { work: "Estádio Serra Dourada", architect: "Paulo Mendes da Rocha", year: "1975", city: "Goiânia", img: "img/obras/estadio-serra-dourada-5.jpg", alt: "Estádio Serra Dourada, de Paulo Mendes da Rocha (1975)", credit: "JorgeBrazil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEst%C3%A1dio%20Serra%20Dourada4.jpg" },
   { work: "FAU-USP", architect: "Vilanova Artigas", year: "1969", city: "São Paulo", img: "img/obras/fau-usp-1.jpg", alt: "FAU-USP, de Vilanova Artigas (1969)", credit: "Núcleo Editorial", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFaculdade%20C%C3%A1sper%20L%C3%ADbero%20(17393200812).jpg" },
   { work: "FAU-USP", architect: "Vilanova Artigas", year: "1969", city: "São Paulo", img: "img/obras/fau-usp-2.jpg", alt: "FAU-USP, de Vilanova Artigas (1969)", credit: "Matheus Carvalho Teixeira", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AVista%20interna%20da%20FAU-USP.jpg" },
   { work: "FAU-USP", architect: "Vilanova Artigas", year: "1969", city: "São Paulo", img: "img/obras/fau-usp-3.jpg", alt: "FAU-USP, de Vilanova Artigas (1969)", credit: "Photograph by Mike Peel (www.mikepeel.net).", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AArchitecture%20and%20Urbanism%20College%20of%20University%20of%20S%C3%A3o%20Paulo%202016%2002.jpg" },
-  { work: "FAU-USP", architect: "Vilanova Artigas", year: "1969", city: "São Paulo", img: "img/obras/fau-usp-4.jpg", alt: "FAU-USP, de Vilanova Artigas (1969)", credit: "Nossedotti", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3AFAU%20USP.jpg" },
   { work: "FAU-USP", architect: "Vilanova Artigas", year: "1969", city: "São Paulo", img: "img/obras/fau-usp-5.jpg", alt: "FAU-USP, de Vilanova Artigas (1969)", credit: "Arte Fora do Museu", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFaculdade%20de%20Arquitetura%20e%20Urbanismo%20-%20USP%2001.jpg" },
-  { work: "MASP", architect: "Lina Bo Bardi", year: "1968", city: "São Paulo", img: "img/obras/masp-1.jpg", alt: "MASP, de Lina Bo Bardi (1968)", credit: "Demetrio Jereissati", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AMasp%20p%C3%A1tio%20dos%20fundos.jpg" },
-  { work: "MASP", architect: "Lina Bo Bardi", year: "1968", city: "São Paulo", img: "img/obras/masp-2.jpg", alt: "MASP, de Lina Bo Bardi (1968)", credit: "Joalpe", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AMuseu%20de%20Arte%20de%20S%C3%A3o%20Paulo%20-%20S%C3%A3o%20Paulo%20-%2020221030230654.jpg" },
-  { work: "MASP", architect: "Lina Bo Bardi", year: "1968", city: "São Paulo", img: "img/obras/masp-3.jpg", alt: "MASP, de Lina Bo Bardi (1968)", credit: "Boaventuravinicius", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AGray%20Sky%20and%20MASP.jpg" },
   { work: "MASP", architect: "Lina Bo Bardi", year: "1968", city: "São Paulo", img: "img/obras/masp-4.jpg", alt: "MASP, de Lina Bo Bardi (1968)", credit: "Andredeak", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3AMasp%20de%20baixo.jpg" },
-  { work: "MASP", architect: "Lina Bo Bardi", year: "1968", city: "São Paulo", img: "img/obras/masp-5.jpg", alt: "MASP, de Lina Bo Bardi (1968)", credit: "andre savastano from São Paulo, Brasil", license: "CC BY-SA 2.0", source: "https://commons.wikimedia.org/wiki/File%3AV%C3%A3o%20Livre%20do%20MASP%2002.jpg" },
   { work: "SESC Pompéia", architect: "Lina Bo Bardi", year: "1986", city: "São Paulo", img: "img/obras/sesc-pompeia-1.jpg", alt: "SESC Pompéia, de Lina Bo Bardi (1986)", credit: "CORRETOR-CARVALHO", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3ASesc%20Pomp%C3%A9ia%20-%20panoramio.jpg" },
   { work: "SESC Pompéia", architect: "Lina Bo Bardi", year: "1986", city: "São Paulo", img: "img/obras/sesc-pompeia-2.jpg", alt: "SESC Pompéia, de Lina Bo Bardi (1986)", credit: "Molina", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3ABeattle%20Juice%20S%20Tower%20(109992543).jpeg" },
   { work: "SESC Pompéia", architect: "Lina Bo Bardi", year: "1986", city: "São Paulo", img: "img/obras/sesc-pompeia-3.jpg", alt: "SESC Pompéia, de Lina Bo Bardi (1986)", credit: "Joalpe", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3ASESC%20Pompeia%20-%20S%C3%A3o%20Paulo%20-%2020220726142122.jpg" },
   { work: "SESC Pompéia", architect: "Lina Bo Bardi", year: "1986", city: "São Paulo", img: "img/obras/sesc-pompeia-4.jpg", alt: "SESC Pompéia, de Lina Bo Bardi (1986)", credit: "JanManu", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3APom-Sporthalle%20Innen.jpg" },
   { work: "SESC Pompéia", architect: "Lina Bo Bardi", year: "1986", city: "São Paulo", img: "img/obras/sesc-pompeia-5.jpg", alt: "SESC Pompéia, de Lina Bo Bardi (1986)", credit: "JanManu", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3APompeia1%20aussen.jpg" },
-  { work: "Edifício Copan", architect: "Oscar Niemeyer", year: "1966", city: "São Paulo", img: "img/obras/edificio-copan-1.jpg", alt: "Edifício Copan, de Oscar Niemeyer (1966)", credit: "Alessandra Ramos Pinto", license: "CC BY-SA 2.0", source: "https://commons.wikimedia.org/wiki/File%3ACopan%20(26963487923).jpg" },
   { work: "Edifício Copan", architect: "Oscar Niemeyer", year: "1966", city: "São Paulo", img: "img/obras/edificio-copan-2.jpg", alt: "Edifício Copan, de Oscar Niemeyer (1966)", credit: "Rodrigo Soldon from Rio de Janeiro, Brazil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEdif%C3%ADcio%20Copan%20(3408031098).jpg" },
   { work: "Edifício Copan", architect: "Oscar Niemeyer", year: "1966", city: "São Paulo", img: "img/obras/edificio-copan-3.jpg", alt: "Edifício Copan, de Oscar Niemeyer (1966)", credit: "Casa de América", license: "CC BY-SA 2.0", source: "https://commons.wikimedia.org/wiki/File%3ACopan%201%202007%20(46606540425).jpg" },
   { work: "Edifício Copan", architect: "Oscar Niemeyer", year: "1966", city: "São Paulo", img: "img/obras/edificio-copan-4.jpg", alt: "Edifício Copan, de Oscar Niemeyer (1966)", credit: "José Eduardo Deboni", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AEdif%C3%ADcio%20Copan%2C%20S%C3%A3o%20Paulo%2C%202008.jpg" },
-  { work: "Edifício Copan", architect: "Oscar Niemeyer", year: "1966", city: "São Paulo", img: "img/obras/edificio-copan-5.jpg", alt: "Edifício Copan, de Oscar Niemeyer (1966)", credit: "Andre Deak", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AS%C3%A3o%20Paulo%20-%20Skyline%20by%20night02.jpg" },
-  { work: "MAC Niterói", architect: "Oscar Niemeyer", year: "1996", city: "Niterói", img: "img/obras/mac-niteroi-1.jpg", alt: "MAC Niterói, de Oscar Niemeyer (1996)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AJuca%20visita%20o%20MAC%2C%20Museu%20de%20Arte%20Contempor%C3%A2nea%20(20245592439).jpg" },
   { work: "MAC Niterói", architect: "Oscar Niemeyer", year: "1996", city: "Niterói", img: "img/obras/mac-niteroi-2.jpg", alt: "MAC Niterói, de Oscar Niemeyer (1996)", credit: "Thaismay", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AMuseu%20de%20Arte%20Contempor%C3%A2nea%20de%20Niter%C3%B3i%20-%20Niter%C3%B3i%20-%2020250309191233.JPG" },
   { work: "MAC Niterói", architect: "Oscar Niemeyer", year: "1996", city: "Niterói", img: "img/obras/mac-niteroi-3.jpg", alt: "MAC Niterói, de Oscar Niemeyer (1996)", credit: "Phx de", license: "CC BY-SA 2.5", source: "https://commons.wikimedia.org/wiki/File%3ANiter%C3%B3i%20bay%20and%20contemporary%20musem.jpg" },
   { work: "MAC Niterói", architect: "Oscar Niemeyer", year: "1996", city: "Niterói", img: "img/obras/mac-niteroi-4.jpg", alt: "MAC Niterói, de Oscar Niemeyer (1996)", credit: "Rosino", license: "CC BY-SA 2.0", source: "https://commons.wikimedia.org/wiki/File%3ANiter%C3%B3i%20Contemporary%20Art%20Museum%202011.jpg" },
   { work: "MAC Niterói", architect: "Oscar Niemeyer", year: "1996", city: "Niterói", img: "img/obras/mac-niteroi-5.jpg", alt: "MAC Niterói, de Oscar Niemeyer (1996)", credit: "NelsonPretto", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3AMAC%20Niteroi%2004.JPG" },
-  { work: "Congresso Nacional", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/congresso-nacional-1.jpg", alt: "Congresso Nacional, de Oscar Niemeyer (1960)", credit: "Diário do Congresso Nacional", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3ADi%C3%A1rio%20do%20Congresso%20Nacional%20(ANO%20LXXIV%20N%C2%B0%201%2C%20QUARTA-FEIRA%2C%202%20DE%20JANEIRO%20DE%202019).jpg" },
-  { work: "Congresso Nacional", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/congresso-nacional-2.jpg", alt: "Congresso Nacional, de Oscar Niemeyer (1960)", credit: "Antonio Cruz/ABr", license: "CC BY 3.0 br", source: "https://commons.wikimedia.org/wiki/File%3ACompromisso%20constitucional%20e%20termo%20de%20posse%20presidencial%20Brasil%201jan2007.jpg" },
   { work: "Congresso Nacional", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/congresso-nacional-3.jpg", alt: "Congresso Nacional, de Oscar Niemeyer (1960)", credit: "Sintegrity", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3ABras%C3%ADlia%20-%20Eixo%20monumental%20-%20rodovi%C3%A1ria%2C%20teatro%2C%20biblioteca%2C%20touring%2C%20museu%2C%20catedral%2C%20ponte%2C%20minist%C3%A9rios%2C%20congresso.jpg" },
-  { work: "Congresso Nacional", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/congresso-nacional-4.jpg", alt: "Congresso Nacional, de Oscar Niemeyer (1960)", credit: "Agência Senado", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3ACJSUBIA%20-%20Comiss%C3%A3o%20de%20Juristas%20respons%C3%A1vel%20por%20subsidiar%20elabora%C3%A7%C3%A3o%20de%20substitutivo%20sobre%20intelig%C3%AAncia%20artificial%20no%20Brasil.jpg" },
-  { work: "Congresso Nacional", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/congresso-nacional-5.jpg", alt: "Congresso Nacional, de Oscar Niemeyer (1960)", credit: "Agência Senado", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3ARodrigo%20Pacheco%20ao%20receber%20o%20relat%C3%B3rio%20final%20da%20Comiss%C3%A3o%20de%20Juristas%20que%20disp%C3%B5e%20sobre%20Intelig%C3%AAncia%20Artificial%20no%20Brasil.jpg" },
   { work: "Palácio da Alvorada", architect: "Oscar Niemeyer", year: "1958", city: "Brasília", img: "img/obras/palacio-da-alvorada-1.jpg", alt: "Palácio da Alvorada, de Oscar Niemeyer (1958)", credit: "autoria não identificada", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3APal%C3%A1cio%20da%20Alvorada%20(1).jpg" },
   { work: "Palácio da Alvorada", architect: "Oscar Niemeyer", year: "1958", city: "Brasília", img: "img/obras/palacio-da-alvorada-2.jpg", alt: "Palácio da Alvorada, de Oscar Niemeyer (1958)", credit: "autoria não identificada", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3APal%C3%A1cio%20da%20Alvorada%20(2).jpg" },
-  { work: "Palácio da Alvorada", architect: "Oscar Niemeyer", year: "1958", city: "Brasília", img: "img/obras/palacio-da-alvorada-3.jpg", alt: "Palácio da Alvorada, de Oscar Niemeyer (1958)", credit: "autoria não identificada", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3AVistas%20de%20Bras%C3%ADlia%20-%20Pal%C3%A1cio%20da%20Alvorada%20(1).jpg" },
   { work: "Palácio da Alvorada", architect: "Oscar Niemeyer", year: "1958", city: "Brasília", img: "img/obras/palacio-da-alvorada-4.jpg", alt: "Palácio da Alvorada, de Oscar Niemeyer (1958)", credit: "autoria não identificada", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3APal%C3%A1cio%20da%20Alvorada%20-%20Capela%20(1).jpg" },
   { work: "Palácio da Alvorada", architect: "Oscar Niemeyer", year: "1958", city: "Brasília", img: "img/obras/palacio-da-alvorada-5.jpg", alt: "Palácio da Alvorada, de Oscar Niemeyer (1958)", credit: "autoria não identificada", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3AObras%20de%20constru%C3%A7%C3%A3o%20de%20Bras%C3%ADlia%20-%20Pal%C3%A1cio%20da%20Alvorada%20(5).jpg" },
   { work: "Auditório Ibirapuera", architect: "Oscar Niemeyer", year: "2005", city: "São Paulo", img: "img/obras/auditorio-ibirapuera-1.jpg", alt: "Auditório Ibirapuera, de Oscar Niemeyer (2005)", credit: "Pēteris", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFile%20by%20Peteris%20P1170370%20(3667704986).jpg" },
   { work: "Auditório Ibirapuera", architect: "Oscar Niemeyer", year: "2005", city: "São Paulo", img: "img/obras/auditorio-ibirapuera-2.jpg", alt: "Auditório Ibirapuera, de Oscar Niemeyer (2005)", credit: "Sérgio Valle Duarte .mw-parser-output .messagebox{margin:4px 0;width:a", license: "CC BY 3.0", source: "https://commons.wikimedia.org/wiki/File%3AAudit%C3%B3rio%20Ibirapuera%20-%202006.jpg" },
-  { work: "Auditório Ibirapuera", architect: "Oscar Niemeyer", year: "2005", city: "São Paulo", img: "img/obras/auditorio-ibirapuera-3.jpg", alt: "Auditório Ibirapuera, de Oscar Niemeyer (2005)", credit: "Sérgio Valle Duarte .mw-parser-output .messagebox{margin:4px 0;width:a", license: "CC BY 3.0", source: "https://commons.wikimedia.org/wiki/File%3AObelisco%20%2C%20Audit%C3%B3rio.jpg" },
-  { work: "Auditório Ibirapuera", architect: "Oscar Niemeyer", year: "2005", city: "São Paulo", img: "img/obras/auditorio-ibirapuera-4.jpg", alt: "Auditório Ibirapuera, de Oscar Niemeyer (2005)", credit: "Sérgio Valle Duarte .mw-parser-output .messagebox{margin:4px 0;width:a", license: "CC BY 3.0", source: "https://commons.wikimedia.org/wiki/File%3AAssembleia%20Legislativa%20e%20Parque.jpg" },
   { work: "Auditório Ibirapuera", architect: "Oscar Niemeyer", year: "2005", city: "São Paulo", img: "img/obras/auditorio-ibirapuera-5.jpg", alt: "Auditório Ibirapuera, de Oscar Niemeyer (2005)", credit: "ermell", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3ABrazil-Ibirapuera-Auditorium-1030458PS.jpg" },
-  { work: "Museu Nacional da República", architect: "Oscar Niemeyer", year: "2006", city: "Brasília", img: "img/obras/museu-nacional-da-republica-1.jpg", alt: "Museu Nacional da República, de Oscar Niemeyer (2006)", credit: "Túllio F", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AExposi%C3%A7%C3%B5es%20no%20Museu%20Nacional%2005.jpg" },
   { work: "Museu Nacional da República", architect: "Oscar Niemeyer", year: "2006", city: "Brasília", img: "img/obras/museu-nacional-da-republica-2.jpg", alt: "Museu Nacional da República, de Oscar Niemeyer (2006)", credit: "MinC.Nordeste", license: "CC BY-SA 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMuseu%20Nacional%20Honestino%20Guimar%C3%A3es%209.jpg" },
   { work: "Museu Nacional da República", architect: "Oscar Niemeyer", year: "2006", city: "Brasília", img: "img/obras/museu-nacional-da-republica-3.jpg", alt: "Museu Nacional da República, de Oscar Niemeyer (2006)", credit: "Cayambe", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3ABras%C3%ADlia%20Museu%20Nacional%20Honestino%20Guimar%C3%A3es.jpg" },
   { work: "Museu Nacional da República", architect: "Oscar Niemeyer", year: "2006", city: "Brasília", img: "img/obras/museu-nacional-da-republica-4.jpg", alt: "Museu Nacional da República, de Oscar Niemeyer (2006)", credit: "Cayambe", license: "CC BY-SA 3.0 lu", source: "https://commons.wikimedia.org/wiki/File%3ABrasilia%20National%20Museum%20National%20Library.jpg" },
@@ -80,18 +59,13 @@ const PROJECTS = [
   { work: "MAM Rio", architect: "Affonso Eduardo Reidy", year: "1955", city: "Rio de Janeiro", img: "img/obras/mam-rio-3.jpg", alt: "MAM Rio, de Affonso Eduardo Reidy (1955)", credit: "Dornicke", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AEspa%C3%A7o%20de%20eventos%20do%20MAM%2002.jpg" },
   { work: "MAM Rio", architect: "Affonso Eduardo Reidy", year: "1955", city: "Rio de Janeiro", img: "img/obras/mam-rio-4.jpg", alt: "MAM Rio, de Affonso Eduardo Reidy (1955)", credit: "Dornicke", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AMAM%20e%20teatro%20-%20Rio%2001.jpg" },
   { work: "MAM Rio", architect: "Affonso Eduardo Reidy", year: "1955", city: "Rio de Janeiro", img: "img/obras/mam-rio-5.jpg", alt: "MAM Rio, de Affonso Eduardo Reidy (1955)", credit: "Dornicke", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3ATeatro%20do%20Museu%20de%20Arte%20Moderna%20do%20Rio%20de%20Janeiro%2002.jpg" },
-  { work: "Teatro Nacional Cláudio Santoro", architect: "Oscar Niemeyer", year: "1966", city: "Brasília", img: "img/obras/teatro-nacional-claudio-santoro-1.jpg", alt: "Teatro Nacional Cláudio Santoro, de Oscar Niemeyer (1966)", credit: "User:Brandizzi", license: "CC BY 2.5", source: "https://commons.wikimedia.org/wiki/File%3AO%20P%C3%A1ssaro%201.jpg" },
   { work: "Teatro Nacional Cláudio Santoro", architect: "Oscar Niemeyer", year: "1966", city: "Brasília", img: "img/obras/teatro-nacional-claudio-santoro-2.jpg", alt: "Teatro Nacional Cláudio Santoro, de Oscar Niemeyer (1966)", credit: "Luis Dantas", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3ATeatro%20Nacional%20Claudio%20Santoro%2002.jpg" },
   { work: "Teatro Nacional Cláudio Santoro", architect: "Oscar Niemeyer", year: "1966", city: "Brasília", img: "img/obras/teatro-nacional-claudio-santoro-3.jpg", alt: "Teatro Nacional Cláudio Santoro, de Oscar Niemeyer (1966)", credit: "Py4nf", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3ATeatro%20nacional%20brasilia.jpg" },
   { work: "Teatro Nacional Cláudio Santoro", architect: "Oscar Niemeyer", year: "1966", city: "Brasília", img: "img/obras/teatro-nacional-claudio-santoro-4.jpg", alt: "Teatro Nacional Cláudio Santoro, de Oscar Niemeyer (1966)", credit: "A C Moraes from Brasília, Brasil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3ABras%C3%ADlia%20(8629553828).jpg" },
   { work: "Teatro Nacional Cláudio Santoro", architect: "Oscar Niemeyer", year: "1966", city: "Brasília", img: "img/obras/teatro-nacional-claudio-santoro-5.jpg", alt: "Teatro Nacional Cláudio Santoro, de Oscar Niemeyer (1966)", credit: "Thiago Melo from Brasília, Brasil", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3ATeatro%20Nacional%20(4893154074).jpg" },
   { work: "Palácio do Planalto", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/palacio-do-planalto-1.jpg", alt: "Palácio do Planalto, de Oscar Niemeyer (1960)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFotos%20produzidas%20pelo%20Senado%20(35097602953).jpg" },
-  { work: "Palácio do Planalto", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/palacio-do-planalto-2.jpg", alt: "Palácio do Planalto, de Oscar Niemeyer (1960)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3ASenado%20Federal%20do%20Brasil%20Fotos%20produzidas%20pelo%20Senado%20(16223144953).jpg" },
-  { work: "Palácio do Planalto", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/palacio-do-planalto-3.jpg", alt: "Palácio do Planalto, de Oscar Niemeyer (1960)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AManifesta%C3%A7%C3%A3o%20(25767271011).jpg" },
-  { work: "Palácio do Planalto", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/palacio-do-planalto-4.jpg", alt: "Palácio do Planalto, de Oscar Niemeyer (1960)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AManifesta%C3%A7%C3%A3o%20(25862337155).jpg" },
   { work: "Palácio do Planalto", architect: "Oscar Niemeyer", year: "1960", city: "Brasília", img: "img/obras/palacio-do-planalto-5.jpg", alt: "Palácio do Planalto, de Oscar Niemeyer (1960)", credit: "Mariordo (Mario Roberto Durán Ortiz)", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3AOs%20Guerreiros%20(Os%20Candangos)%20BSB%2008%202005%2033.jpg" },
   { work: "Memorial da América Latina", architect: "Oscar Niemeyer", year: "1989", city: "São Paulo", img: "img/obras/memorial-da-america-latina-1.jpg", alt: "Memorial da América Latina, de Oscar Niemeyer (1989)", credit: "Núcleo Editorial", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMemorial%20da%20Am%C3%A9rica%20Latina%20(16734674763).jpg" },
-  { work: "Memorial da América Latina", architect: "Oscar Niemeyer", year: "1989", city: "São Paulo", img: "img/obras/memorial-da-america-latina-2.jpg", alt: "Memorial da América Latina, de Oscar Niemeyer (1989)", credit: "Governo do Estado de São Paulo", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMemorial%20da%20Am%C3%A9rica%20Latina.%20(46709677435).jpg" },
   { work: "Memorial da América Latina", architect: "Oscar Niemeyer", year: "1989", city: "São Paulo", img: "img/obras/memorial-da-america-latina-3.jpg", alt: "Memorial da América Latina, de Oscar Niemeyer (1989)", credit: "Governo do Estado de São Paulo", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMemorial%20da%20Am%C3%A9rica%20Latina.%20(40658808253).jpg" },
   { work: "Memorial da América Latina", architect: "Oscar Niemeyer", year: "1989", city: "São Paulo", img: "img/obras/memorial-da-america-latina-4.jpg", alt: "Memorial da América Latina, de Oscar Niemeyer (1989)", credit: "autoria não identificada", license: "CC BY-SA 3.0", source: "https://commons.wikimedia.org/wiki/File%3ACentroderecep%C3%A7%C3%A3o-Memorial.jpg" },
   { work: "Memorial da América Latina", architect: "Oscar Niemeyer", year: "1989", city: "São Paulo", img: "img/obras/memorial-da-america-latina-5.jpg", alt: "Memorial da América Latina, de Oscar Niemeyer (1989)", credit: "Dornicke", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3AAudit%C3%B3rio%20Sim%C3%B3n%20Bol%C3%ADvar%2002.jpg" },
@@ -99,17 +73,10 @@ const PROJECTS = [
   { work: "Palácio da Justiça", architect: "Oscar Niemeyer", year: "1970", city: "Brasília", img: "img/obras/palacio-da-justica-2.jpg", alt: "Palácio da Justiça, de Oscar Niemeyer (1970)", credit: "Arquivo/Agência Brasil", license: "CC BY 3.0 br", source: "https://commons.wikimedia.org/wiki/File%3AArquivo%20da%20Ag%C3%AAncia%20Brasil%20-%20Bras%C3%ADlia%2012.jpg" },
   { work: "Palácio da Justiça", architect: "Oscar Niemeyer", year: "1970", city: "Brasília", img: "img/obras/palacio-da-justica-3.jpg", alt: "Palácio da Justiça, de Oscar Niemeyer (1970)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFotos%20produzidas%20pelo%20Senado%20(31106158601).jpg" },
   { work: "Palácio da Justiça", architect: "Oscar Niemeyer", year: "1970", city: "Brasília", img: "img/obras/palacio-da-justica-4.jpg", alt: "Palácio da Justiça, de Oscar Niemeyer (1970)", credit: "Senado Federal, Foto: Roque de Sá/Agência Senado", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AFotos%20produzidas%20pelo%20Senado%20(31039158601).jpg" },
-  { work: "Palácio da Justiça", architect: "Oscar Niemeyer", year: "1970", city: "Brasília", img: "img/obras/palacio-da-justica-5.jpg", alt: "Palácio da Justiça, de Oscar Niemeyer (1970)", credit: "Neto", license: "CC BY 3.0", source: "https://commons.wikimedia.org/wiki/File%3AAs%2027%20Bandeiras%20-%20panoramio.jpg" },
   { work: "Panteão da Pátria", architect: "Oscar Niemeyer", year: "1986", city: "Brasília", img: "img/obras/panteao-da-patria-1.jpg", alt: "Panteão da Pátria, de Oscar Niemeyer (1986)", credit: "Senado Federal", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3APante%C3%A3o%20da%20P%C3%A1tria%20Tancredo%20Neves%20-%2043752599380.jpg" },
-  { work: "Panteão da Pátria", architect: "Oscar Niemeyer", year: "1986", city: "Brasília", img: "img/obras/panteao-da-patria-2.jpg", alt: "Panteão da Pátria, de Oscar Niemeyer (1986)", credit: "Luis Dantas", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3APraca%20panteao.jpg" },
   { work: "Panteão da Pátria", architect: "Oscar Niemeyer", year: "1986", city: "Brasília", img: "img/obras/panteao-da-patria-3.jpg", alt: "Panteão da Pátria, de Oscar Niemeyer (1986)", credit: "Alex Pereira", license: "Public domain", source: "https://commons.wikimedia.org/wiki/File%3APanteaodadem.jpg" },
   { work: "Panteão da Pátria", architect: "Oscar Niemeyer", year: "1986", city: "Brasília", img: "img/obras/panteao-da-patria-4.jpg", alt: "Panteão da Pátria, de Oscar Niemeyer (1986)", credit: "Rezieredegobi", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APraca%20dos%20Tr%C3%AAs%20Poderes.tiff" },
   { work: "Panteão da Pátria", architect: "Oscar Niemeyer", year: "1986", city: "Brasília", img: "img/obras/panteao-da-patria-5.jpg", alt: "Panteão da Pátria, de Oscar Niemeyer (1986)", credit: "Joehawkins", license: "CC BY-SA 4.0", source: "https://commons.wikimedia.org/wiki/File%3APra%C3%A7a%20dos%20Tr%C3%AAs%20Poderes%20com%20bandeira%20e%20Pombal.JPG" },
-  { work: "Memorial Darcy Ribeiro", architect: "João Filgueiras Lima", year: "2010", city: "Brasília", img: "img/obras/memorial-darcy-ribeiro-1.jpg", alt: "Memorial Darcy Ribeiro, de João Filgueiras Lima (2010)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMinist%C3%A9rio%20da%20Cultura%20-%20Ministro%20Juca%20Ferreira%20inaugura%20na%20UnB%20espa%C3%A7o%20que%20homenageado%20batizou%20%E2%80%9CBeij%C3%B3dromo%E2%80%9D%20(2).jpg" },
-  { work: "Memorial Darcy Ribeiro", architect: "João Filgueiras Lima", year: "2010", city: "Brasília", img: "img/obras/memorial-darcy-ribeiro-2.jpg", alt: "Memorial Darcy Ribeiro, de João Filgueiras Lima (2010)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMinist%C3%A9rio%20da%20Cultura%20-%20Ministro%20Juca%20Ferreira%20inaugura%20na%20UnB%20espa%C3%A7o%20que%20homenageado%20batizou%20%E2%80%9CBeij%C3%B3dromo%E2%80%9D%20(3).jpg" },
-  { work: "Memorial Darcy Ribeiro", architect: "João Filgueiras Lima", year: "2010", city: "Brasília", img: "img/obras/memorial-darcy-ribeiro-3.jpg", alt: "Memorial Darcy Ribeiro, de João Filgueiras Lima (2010)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMinist%C3%A9rio%20da%20Cultura%20-%20Ministro%20Juca%20Ferreira%20inaugura%20na%20UnB%20espa%C3%A7o%20que%20homenageado%20batizou%20%E2%80%9CBeij%C3%B3dromo%E2%80%9D%20(6).jpg" },
-  { work: "Memorial Darcy Ribeiro", architect: "João Filgueiras Lima", year: "2010", city: "Brasília", img: "img/obras/memorial-darcy-ribeiro-4.jpg", alt: "Memorial Darcy Ribeiro, de João Filgueiras Lima (2010)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMinist%C3%A9rio%20da%20Cultura%20-%20Ministro%20Juca%20Ferreira%20inaugura%20na%20UnB%20espa%C3%A7o%20que%20homenageado%20batizou%20%E2%80%9CBeij%C3%B3dromo%E2%80%9D%20(7).jpg" },
-  { work: "Memorial Darcy Ribeiro", architect: "João Filgueiras Lima", year: "2010", city: "Brasília", img: "img/obras/memorial-darcy-ribeiro-5.jpg", alt: "Memorial Darcy Ribeiro, de João Filgueiras Lima (2010)", credit: "Ministério da Cultura", license: "CC BY 2.0", source: "https://commons.wikimedia.org/wiki/File%3AMinist%C3%A9rio%20da%20Cultura%20-%20Ministro%20Juca%20Ferreira%20inaugura%20na%20UnB%20espa%C3%A7o%20que%20homenageado%20batizou%20%E2%80%9CBeij%C3%B3dromo%E2%80%9D%20(9).jpg" },
 ];
 
 function slugify(str) {
@@ -344,6 +311,113 @@ if (homeGalleryEl) {
       current += (target - current) * ease;
       const wrapped = current % periodHeight;
       homeGalleryEl.style.transform = `translateY(${-wrapped}px)`;
+      requestAnimationFrame(raf);
+    })();
+  }
+}
+
+/* ---------------- galeria: percurso pelo acervo ----------------
+   A página é um trilho alto de rolagem. A posição do scroll vira um índice
+   fracionário; um valor "atual" persegue esse alvo por interpolação a cada
+   quadro, e é ele que decide a foto ativa, a posição da coluna e o empurrão
+   horizontal de cada miniatura. A suavidade toda vem dessa perseguição —
+   não há transição de CSS no transform, senão as duas brigariam.
+---------------------------------------------------------------- */
+const galeriaThumbsEl = document.getElementById('galeria-thumbs');
+const galeriaFocusEl = document.getElementById('galeria-focus');
+if (galeriaThumbsEl && galeriaFocusEl) {
+  const captionEl = document.getElementById('galeria-caption');
+  const SCROLL_POR_FOTO = 110; // altura de rolagem que cada foto ocupa no trilho
+
+  const thumbs = [];
+  const focos = [];
+  PROJECTS.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'galeria-thumb';
+    btn.setAttribute('aria-label', item.work);
+    const t = document.createElement('img');
+    t.src = item.img;
+    t.alt = '';
+    btn.appendChild(t);
+    btn.addEventListener('click', () => irPara(i));
+    galeriaThumbsEl.appendChild(btn);
+    thumbs.push(btn);
+
+    const foco = document.createElement('div');
+    foco.className = 'galeria-focus-item';
+    const f = document.createElement('img');
+    f.src = item.img;
+    f.alt = item.alt;
+    // sem lazy: a troca no scroll precisa ser instantânea
+    foco.appendChild(f);
+    galeriaFocusEl.appendChild(foco);
+    focos.push(foco);
+  });
+
+  const galeriaEl = document.getElementById('galeria');
+  const railTotal = () => PROJECTS.length * SCROLL_POR_FOTO + window.innerHeight;
+  function medirTrilho() { galeriaEl.style.height = railTotal() + 'px'; }
+  medirTrilho();
+
+  function irPara(i) {
+    const max = railTotal() - window.innerHeight;
+    window.scrollTo({ top: (i / (PROJECTS.length - 1)) * max, behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  /* centro de cada miniatura na coluna, para poder alinhá-la ao meio da tela.
+     As alturas variam com a proporção de cada foto, então são medidas — e
+     remedidas quando as imagens terminam de carregar ou a janela muda. */
+  let centros = [];
+  function medirCentros() {
+    centros = thumbs.map(t => t.offsetTop + t.offsetHeight / 2);
+  }
+  medirCentros();
+  window.addEventListener('load', () => { medirCentros(); medirTrilho(); });
+  window.addEventListener('resize', () => { medirCentros(); medirTrilho(); });
+
+  let atual = 0;
+  let ativoAnterior = -1;
+
+  function desenhar(indice) {
+    const n = PROJECTS.length;
+    const piso = Math.max(0, Math.min(n - 1, Math.floor(indice)));
+    const teto = Math.min(n - 1, piso + 1);
+    const fracao = indice - piso;
+
+    // coluna: interpola entre os centros vizinhos e alinha ao meio da tela
+    const centro = centros[piso] + (centros[teto] - centros[piso]) * fracao;
+    galeriaThumbsEl.style.transform = `translateY(${window.innerHeight / 2 - centro}px)`;
+
+    // curva de sino: a miniatura ativa avança ~64px, as vizinhas bem menos
+    thumbs.forEach((t, i) => {
+      const d = i - indice;
+      const avanco = 64 * Math.exp(-(d * d) / 1.3);
+      t.style.transform = `translateX(${avanco - 112}px)`;
+    });
+
+    const ativo = Math.round(indice);
+    if (ativo !== ativoAnterior) {
+      thumbs.forEach((t, i) => t.classList.toggle('is-active', i === ativo));
+      focos.forEach((f, i) => f.classList.toggle('is-active', i === ativo));
+      const item = PROJECTS[ativo];
+      captionEl.textContent = `${item.work} · ${item.architect}, ${item.year} · foto: ${item.credit} (${item.license})`;
+      ativoAnterior = ativo;
+    }
+  }
+
+  function alvo() {
+    const max = railTotal() - window.innerHeight;
+    return max > 0 ? (window.scrollY / max) * (PROJECTS.length - 1) : 0;
+  }
+
+  if (reduce) {
+    desenhar(0);
+    window.addEventListener('scroll', () => desenhar(alvo()), { passive: true });
+  } else {
+    (function raf() {
+      atual += (alvo() - atual) * 0.1;
+      desenhar(atual);
       requestAnimationFrame(raf);
     })();
   }

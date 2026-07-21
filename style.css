@@ -46,6 +46,7 @@
   --space-6:calc(var(--space-base) * 6);
   --space-8:calc(var(--space-base) * 8);
   --space-16:calc(var(--space-base) * 16);
+  --space-20:calc(var(--space-base) * 20);
   --space-24:calc(var(--space-base) * 24);
   --space-32:calc(var(--space-base) * 32);
 
@@ -431,6 +432,89 @@ body.has--finished .view--list .work-name{
 }
 .work-toggle button:hover,
 .work-toggle button.is-active{border-bottom-color:var(--ink)}
+
+/* ================= GALERIA: percurso pelo acervo =========================
+   A página é um trilho alto de rolagem (altura definida no JS). Coluna de
+   miniaturas e foto em destaque ficam fixas; a posição do scroll é que
+   escolhe a foto ativa. As miniaturas repousam recuadas à esquerda e são
+   empurradas pra direita conforme se aproximam da ativa, formando uma
+   curva de sino que acompanha a rolagem.
+========================================================================= */
+.galeria{position:relative}
+
+.galeria-thumbs{
+  position:fixed;top:0;left:0;z-index:11;
+  width:calc(var(--space-20) + var(--space-8) * 2);
+  height:100svh;overflow:hidden;
+  pointer-events:none;
+}
+.galeria-thumbs-list{
+  position:absolute;top:0;left:var(--space-8);
+  display:flex;flex-direction:column;gap:var(--space-2);
+  will-change:transform;
+}
+.galeria-thumb{
+  width:var(--space-20);flex:none;
+  /* repouso: recuada pra fora da margem; o JS empurra pra direita */
+  transform:translateX(calc(-1 * (var(--space-20) + var(--space-8))));
+  opacity:.5;
+  pointer-events:auto;cursor:pointer;
+  padding:0;border:none;background:none;
+  transition:opacity .49s var(--cubic);
+}
+.galeria-thumb.is-active{opacity:1}
+.galeria-thumb img{width:100%;height:auto;display:block}
+
+/* pilha: todas as fotos no mesmo lugar, revelando uma por vez */
+.galeria-focus{
+  position:fixed;z-index:9;
+  top:calc(var(--top-bottom-lheight) + var(--top-bottom-padding) * 2);
+  bottom:calc(var(--top-bottom-lheight) + var(--top-bottom-padding) * 2);
+  left:50%;transform:translateX(-50%);
+  width:min(58vw,900px);
+  pointer-events:none;
+}
+.galeria-focus-item{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  transition:opacity .79s var(--cubic);
+}
+.galeria-focus-item.is-active{opacity:1}
+.galeria-focus-item img{
+  max-width:100%;max-height:100%;
+  width:auto;height:auto;display:block;object-fit:contain;
+}
+
+/* crédito em texto vertical, à direita da foto */
+.galeria-caption{
+  position:fixed;z-index:11;
+  top:50%;right:var(--space-8);
+  transform:translateY(-50%);
+  max-height:70svh;
+  writing-mode:vertical-rl;
+  font-size:var(--font-size-mini);
+  letter-spacing:.06em;text-transform:none;
+  pointer-events:none;
+}
+
+.galeria-bottom{
+  position:fixed;left:50%;bottom:var(--top-bottom-padding);z-index:11;
+  transform:translateX(-50%);
+}
+.galeria-bottom a{
+  font-size:var(--font-size-h4);line-height:var(--top-bottom-lheight);
+  letter-spacing:.02em;text-transform:uppercase;
+  border-bottom:2px solid transparent;
+  transition:border-color .49s var(--cubic);
+}
+.galeria-bottom a:hover{border-bottom-color:var(--ink)}
+
+@media (max-width:768px){
+  .galeria-thumbs{display:none}
+  .galeria-focus{width:86vw}
+  .galeria-caption{right:var(--space-2);font-size:var(--font-size-micro)}
+}
 
 /* ---------- projeto (foco): título + filmstrip + imagem principal ---------- */
 .project-focus{

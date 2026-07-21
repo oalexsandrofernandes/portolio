@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  PORTFÓLIO — ALEXSANDRO FERNANDES — PROJETOS (WORK)
+  PORTFÓLIO — ALEXSANDRO FERNANDES — GALERIA
   ============================================================
-  Índice de projetos em dois modos: GRADE (miniaturas com o nome
-  revelado no hover) e LISTA (nomes grandes que revelam a foto de
-  capa no hover). Os dados vêm do array PROJECTS em script.js.
+  Percurso pelas 60 fotos, uma de cada vez em tamanho grande.
+  A página é um "trilho" alto de rolagem: a coluna de miniaturas
+  e a foto em destaque ficam fixas na tela, e a posição do scroll
+  é que escolhe qual foto está ativa. Conteúdo vem do array
+  PROJECTS em script.js.
   ============================================================
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Projetos — Alexsandro Fernandes</title>
+<title>Galeria — Alexsandro Fernandes</title>
 <link rel="stylesheet" href="style.css?v=13">
 </head>
-<body class="is-work">
+<body class="is-galeria">
 
 <header class="site-header">
   <button type="button" class="nav-opener" id="nav-opener" aria-expanded="false" aria-controls="navscreen" aria-label="Menu">
@@ -31,7 +33,7 @@
       <a href="galeria.html"><span>Galeria</span></a>
       <a href="trabalhos.html"><span>Trabalhos</span></a>
     </nav>
-    <p class="navscreen-about">Estudo de arquitetura moderna brasileira reunido por Alexsandro Fernandes como exercício de desenvolvimento web. As obras aqui são de seus respectivos arquitetos — Paulo Mendes da Rocha, Vilanova Artigas, Lina Bo Bardi, Oscar Niemeyer, Affonso Eduardo Reidy e João Filgueiras Lima — e cada foto traz crédito, licença e link para a fonte. Nenhuma delas é de autoria própria.</p>
+    <p class="navscreen-about">Estudo de arquitetura moderna brasileira reunido por Alexsandro Fernandes como exercício de desenvolvimento web. As obras aqui são de seus respectivos arquitetos — Paulo Mendes da Rocha, Vilanova Artigas, Lina Bo Bardi, Oscar Niemeyer e Affonso Eduardo Reidy — e cada foto traz crédito, licença e link para a fonte. Nenhuma delas é de autoria própria.</p>
     <div class="navscreen-footer">
       <a class="navscreen-contact" href="mailto:oalexsandrofernandes@icloud.com" title="Contato">Contato</a>
       <span class="navscreen-copyright mono">© 2026 Alexsandro Fernandes — todos os direitos reservados</span>
@@ -43,21 +45,21 @@
   </div>
 </div>
 
-<!-- ----------------------------------------------------------------
-  WORK: os dois conjuntos vivem sempre no DOM ao mesmo tempo — as fotos
-  em .work-grid e os nomes em .work-list — pareados pelo data-rel. A
-  classe view--grid / view--list decide qual dos dois é o conteúdo e
-  qual vira a camada de revelação no hover. Não são dois layouts: é a
-  mesma estrutura espelhada.
------------------------------------------------------------------ -->
-<main class="work view--grid" id="work">
-  <div class="work-grid" id="work-grid"></div>
-  <div class="work-list" id="work-list"></div>
-</main>
+<!-- trilho de rolagem: a altura é definida via JS, proporcional ao acervo -->
+<section class="galeria" id="galeria">
+  <!-- coluna de miniaturas, fixa na tela; o scroll move a lista por dentro -->
+  <div class="galeria-thumbs" aria-hidden="true">
+    <div class="galeria-thumbs-list" id="galeria-thumbs"></div>
+  </div>
 
-<nav class="work-toggle" aria-label="Alternar visualização">
-  <button type="button" class="is-active" data-view="grid" aria-pressed="true">Grade</button>
-  <button type="button" data-view="list" aria-pressed="false">Lista</button>
+  <!-- pilha de fotos no mesmo lugar: só a ativa fica visível -->
+  <div class="galeria-focus" id="galeria-focus"></div>
+
+  <p class="galeria-caption" id="galeria-caption"></p>
+</section>
+
+<nav class="galeria-bottom">
+  <a href="index.html">Voltar</a>
 </nav>
 
 <div class="page-veil" aria-hidden="true"></div>
