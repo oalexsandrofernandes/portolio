@@ -8,10 +8,41 @@ num servidor estático (Live Server do VS Code, `python -m http.server`, etc.).
 - `trabalhos.html` — índice dos projetos, em grade ou lista
 - `projeto.html?p=<slug>` — página de um projeto (filmstrip + foto grande)
 
-As fotos e os dados dos projetos ficam no array `PROJECTS`, no topo de
-`script.js`. Trocar lá atualiza as três páginas de uma vez. As imagens atuais
-são de banco gratuito (Unsplash) e servem só como referência visual — devem ser
-substituídas pelas fotos reais dos projetos.
+As fotos e os dados das obras ficam no array `PROJECTS`, no topo de
+`script.js`. Trocar lá atualiza as três páginas de uma vez.
+
+## Imagens e licenças
+
+As imagens em `img/obras/` são de **obras de terceiros**, usadas aqui como
+material de estudo. São 93 fotos de 19 obras, de seis arquitetos: Paulo Mendes
+da Rocha, Vilanova Artigas, Lina Bo Bardi, Oscar Niemeyer, Affonso Eduardo
+Reidy e João Filgueiras Lima.
+
+Todas vieram do [Wikimedia Commons](https://commons.wikimedia.org) sob licença
+livre — CC BY, CC BY-SA ou domínio público. Cada entrada do array `PROJECTS`
+carrega quatro campos de procedência, exibidos no painel *Info* da página da
+obra:
+
+| Campo | O que guarda |
+| --- | --- |
+| `architect` | quem projetou a obra |
+| `credit` | quem fotografou |
+| `license` | a licença da foto |
+| `source` | link para o arquivo no Commons |
+
+Duas coisas sustentam esse uso. As licenças CC e o domínio público permitem
+redistribuição, desde que com atribuição — por isso os créditos são exibidos, e
+não apenas guardados. E a fotografia dessas obras é possível porque o Brasil tem
+**liberdade de panorama**: o art. 48 da Lei 9.610/98 permite representar
+livremente obras permanentemente situadas em logradouros públicos.
+
+O que isso **não** cobre: fotos de portais editoriais como ArchDaily, Dezeen ou
+dos sites dos próprios escritórios. Elas pertencem aos fotógrafos e dar crédito
+não substitui a licença. O mesmo vale para residências privadas contemporâneas,
+que raramente têm registro sob licença livre.
+
+Ao substituir por projetos próprios, troque `architect` e `credit` por autoria
+própria e remova `license` e `source`.
 
 ## Fontes
 
