@@ -327,37 +327,58 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 .g-item img{width:100%;height:auto;display:block}
 
 /* ---------- trabalhos: work grid (nome no hover) ---------- */
-.work{padding:calc(clamp(20px,4vw,36px) + 32px + 6vh) var(--pad) calc(var(--space-32) + 40px)}
+/* a folga de baixo precisa cobrir o deslocamento das colunas alternadas
+   (metade da célula + metade do row-gap) mais a barra GRADE/LISTA fixa */
+.work{padding:calc(clamp(20px,4vw,36px) + 32px + 6vh) var(--pad) calc(28vh + 80px)}
+/* mesma linguagem da home — mesmos gaps, mesma proporção natural das fotos,
+   mesmo deslocamento alternado. Menos colunas porque aqui a lista é finita
+   (um card por projeto), não um loop infinito: com 5 colunas sobraria uma
+   única linha e o resto da tela vazio. */
 .work-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  column-gap:5vw;row-gap:12vh;
-  align-items:start;
+  --col-gap:6vw;
+  --row-gap:16vh;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  column-gap:var(--col-gap);row-gap:var(--row-gap);
+  align-items:center;
 }
 .work-card{
-  position:relative;display:block;
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:calc(100svh / 2.6 - var(--row-gap) / 2);
   /* entrada: cada miniatura chega desfocada e "revela" ao entrar na tela */
   opacity:0;filter:blur(16px);
   transition:opacity .7s var(--cubic-2),filter .7s var(--cubic-2);
 }
 .work-card.in{opacity:1;filter:blur(0)}
-.work-card:nth-child(4n+2){transform:translateY(7vh)}
-.work-card:nth-child(4n){transform:translateY(3vh)}
-.work-card img{width:100%;height:auto;display:block}
+.work-card:nth-child(3n+2){transform:translateY(calc(50% + var(--row-gap) / 2))}
+
+/* proporção natural da foto, igual à home — retratos e paisagens convivem
+   em formatos diferentes em vez de todos na mesma largura de coluna */
+.work-card img{
+  max-width:110%;max-height:120%;
+  width:auto;height:auto;display:block;
+}
+
+/* nome no hover: véu de papel sobre a foto e texto em tinta — sem branco
+   nem sombra, que não existem no resto do site */
 .work-name{
   position:absolute;inset:0;z-index:2;
   display:flex;align-items:center;justify-content:center;
-  perspective:1000px;text-align:center;padding:0 8%;
+  perspective:1000px;text-align:center;padding:0 6%;
+  background:var(--paper);
+  opacity:0;transition:opacity .49s var(--cubic-2);
 }
+.work-card:hover .work-name,
+.work-card:focus-visible .work-name{opacity:.92}
 .work-name>span{
   display:block;
   font-family:var(--font-family-heading);font-weight:800;
-  font-size:var(--font-size-h4);letter-spacing:.02em;text-transform:uppercase;
-  color:#F5F3F0;text-shadow:0 2px 18px rgba(12,12,12,.5);
-  transform:rotateX(-90deg);opacity:0;
-  transition:transform .49s var(--cubic),opacity .35s ease;
+  font-size:var(--font-size-h5);letter-spacing:.02em;text-transform:uppercase;
+  color:var(--ink);
+  transform:rotateX(-90deg);
+  transition:transform .49s var(--cubic);
 }
 .work-card:hover .work-name>span,
-.work-card:focus-visible .work-name>span{transform:none;opacity:1}
+.work-card:focus-visible .work-name>span{transform:none}
 
 /* ---------- trabalhos: work list (fotos no hover dos nomes) ---------- */
 .work-list{display:none;list-style:none;position:relative;z-index:2;text-align:center;padding:4vh 0}
@@ -394,10 +415,15 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 .work.view--list .work-list{display:block}
 
 /* alternador GRADE/LISTA fixo na base, como a barra da referência */
+/* fundo com blur igual ao da barra da página de projeto: sem ele o
+   conteúdo passa por baixo durante a rolagem e o texto some */
 .work-toggle{
   position:fixed;left:50%;bottom:clamp(16px,2.5vw,28px);z-index:60;
   transform:translateX(-50%);
   display:flex;gap:var(--space-2);align-items:center;
+  padding:10px 22px;border-radius:999px;
+  background:rgba(245,243,240,.82);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
 }
 .work-toggle button{
   font-family:var(--font-family-nav);font-weight:300;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
@@ -470,9 +496,9 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 
 /* ---------- responsivo ---------- */
 @media (max-width:768px){
-  .work-grid{grid-template-columns:repeat(2,1fr);column-gap:var(--space-4);row-gap:8vh}
-  .work-card:nth-child(4n+2),.work-card:nth-child(4n){transform:none}
-  .work-card:nth-child(2n){transform:translateY(6vh)}
+  .work-grid{--col-gap:var(--space-4);--row-gap:10vh;grid-template-columns:repeat(2,1fr)}
+  .work-card:nth-child(3n+2){transform:none}
+  .work-card:nth-child(2n){transform:translateY(calc(50% + var(--row-gap) / 2))}
   .work-list-preview{max-width:72vw;max-height:48vh}
   .navscreen-footer{flex-direction:column;align-items:center;gap:var(--space-3)}
 }
