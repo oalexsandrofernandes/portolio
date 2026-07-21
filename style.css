@@ -3,8 +3,8 @@
    visual — títulos, corpo, navegação e botões usam exatamente a mesma voz. */
 @font-face{
   font-family:"Rational";
-  src:url("fonts/RationalDisplay-ExtraBold.otf") format("opentype");
-  font-weight:800;
+  src:url("fonts/RationalDisplay-Bold.otf") format("opentype");
+  font-weight:700;
   font-style:normal;
   font-display:swap;
 }
@@ -33,6 +33,10 @@
   --font-size-mini:clamp(12px,1vw,13px);
   --font-size-micro:clamp(11px,1vw,11px);
 
+  /* tamanho dos títulos navegáveis: os links do menu e os nomes das obras
+     em trabalhos usam exatamente o mesmo corpo */
+  --font-size-nav-title:clamp(28px,4.6vw,62px);
+
   /* tokens de espaçamento — base 0.4rem, múltiplos calculados */
   --space-base:.4rem;
   --space-1:var(--space-base);
@@ -60,7 +64,7 @@ body{
   color:var(--ink);
   font-family:var(--font-family-body);
   font-size:var(--font-size-h3);
-  font-weight:800;
+  font-weight:700;
   letter-spacing:.02em;
   text-transform:uppercase;
   line-height:1.45;
@@ -147,8 +151,8 @@ body.nav-open{overflow:hidden}
 .navscreen-nav{display:flex;flex-direction:column;align-items:center}
 .navscreen-nav a{
   display:block;overflow:hidden;
-  font-family:var(--font-family-heading);font-weight:800;
-  font-size:clamp(28px,4.6vw,62px);line-height:1.1;
+  font-family:var(--font-family-heading);font-weight:700;
+  font-size:var(--font-size-nav-title);line-height:1.1;
   letter-spacing:.02em;text-transform:uppercase;
 }
 .navscreen-nav a>span{display:block;position:relative;transform:translateY(110%);transition:transform .79s var(--cubic)}
@@ -189,7 +193,7 @@ body.nav-open{overflow:hidden}
   flex:none;
 }
 .navscreen-contact,.navscreen-social a{
-  font-family:var(--font-family-heading);font-weight:800;
+  font-family:var(--font-family-heading);font-weight:700;
   font-size:clamp(15px,1.7vw,24px);letter-spacing:.02em;text-transform:uppercase;
 }
 .navscreen-social{display:flex;gap:var(--space-8)}
@@ -204,7 +208,7 @@ body.nav-open{overflow:hidden}
   overflow-wrap:break-word;
   text-align:center;
   font-family:var(--font-family-heading);
-  font-weight:800;
+  font-weight:700;
   font-size:clamp(13px,4.4vw,52px);
   line-height:1.05;
   letter-spacing:-.02em;
@@ -292,19 +296,15 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
    desfocado para nítido, na curva --cubic.
 ========================================================================== */
 
-/* --- gesto compartilhado: escondido / revelando / saindo --- */
-.work-name,
-.view--list .work-grid-item{
-  opacity:0;filter:blur(12px);
-  backface-visibility:hidden;
-}
+/* --- gesto de revelação do TEXTO: giro no eixo X + desfoque --- */
 .work-name{
   display:inline-block;
+  opacity:0;filter:blur(12px);
+  backface-visibility:hidden;
   transform-style:preserve-3d;transform-origin:center center;
   transform:translateY(50%) rotateX(-90deg);
 }
-.is-hovering .work-name,
-.view--list .work-grid-item.is-hovering{
+.is-hovering .work-name{
   transform:none;opacity:1;filter:blur(0);
   transition:transform .79s var(--cubic),opacity .79s var(--cubic),filter .79s var(--cubic);
 }
@@ -322,16 +322,19 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
   position:relative;
   display:flex;flex-wrap:wrap;
   column-gap:calc(88vw - var(--col) * 2);
-  row-gap:32vw;
-  width:88vw;margin:16vw auto 24vw;
+  /* linhas se entrelaçam: o vão é menor que a altura da foto, então a
+     próxima já está entrando na tela antes da anterior sair */
+  row-gap:10vw;
+  width:88vw;margin:14vw auto 20vw;
 }
 .view--grid .work-grid-item{
   position:relative;
   width:var(--col);height:32vw;
   display:flex;align-items:center;justify-content:center;
 }
-/* itens pares descem: é isso que troca a grade rígida por ritmo vertical */
-.view--grid .work-grid-item:nth-child(even){transform:translateY(calc(50% + 16vw))}
+/* itens pares descem meia altura: a segunda foto começa no meio da
+   primeira, e não uma linha inteira abaixo dela */
+.view--grid .work-grid-item:nth-child(even){transform:translateY(50%)}
 /* as fotos ficam dentro da própria coluna: temos cinco projetos, não dez,
    então deixar a foto transbordar até o centro faria ela brigar com o nome
    revelado, que aparece exatamente ali */
@@ -354,7 +357,7 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 }
 .view--grid .work-name{
   font-family:var(--font-family-heading);
-  font-size:var(--font-size-h2);line-height:1.1;
+  font-size:var(--font-size-nav-title);line-height:1.1;
   letter-spacing:.02em;text-transform:uppercase;
 }
 
@@ -375,7 +378,7 @@ body.is-leaving .page-veil{backdrop-filter:blur(12px);-webkit-backdrop-filter:bl
 .view--list .work-name{
   /* aqui o nome é conteúdo, não revelação: entra em cascata no load e fica */
   font-family:var(--font-family-heading);
-  font-size:var(--font-size-h2);line-height:1.12;
+  font-size:var(--font-size-nav-title);line-height:1.12;
   letter-spacing:.02em;text-transform:uppercase;
 }
 body.has--finished .view--list .work-name{
@@ -393,14 +396,19 @@ body.has--finished .view--list .work-name{
   position:fixed;inset:0;z-index:1;
   pointer-events:none;
 }
+/* a foto não se move: nasce e permanece centrada no eixo Y, no seu lado.
+   O que anima é só opacidade e desfoque — por isso o translateY(-50%) fica
+   fora da transição e nunca é zerado pelo estado de hover */
 .view--list .work-grid-item{
   position:absolute;top:50%;
   left:var(--space-24);
   width:24vw;height:24vw;
   transform:translateY(-50%);
   display:flex;align-items:center;justify-content:center;
+  opacity:0;filter:blur(12px);
   transition:opacity .49s ease,filter .49s ease;
 }
+.view--list .work-grid-item.is-hovering{opacity:1;filter:blur(0)}
 .view--list .work-grid-item:nth-child(even){left:auto;right:var(--space-24)}
 .view--list .work-grid-item img{
   max-width:33.6vw;max-height:33.6vw;
@@ -430,7 +438,7 @@ body.has--finished .view--list .work-name{
   text-align:center;
 }
 .project-focus-title{
-  font-family:var(--font-family-heading);font-weight:800;
+  font-family:var(--font-family-heading);font-weight:700;
   font-size:clamp(28px,5vw,64px);letter-spacing:-.01em;
   text-transform:uppercase;margin-bottom:clamp(24px,4vw,48px);
 }
